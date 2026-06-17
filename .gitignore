@@ -8,10 +8,9 @@ __pycache__/
 *.py[cod]
 *$py.class
 
-# Data, Evaluation and Temporary Storage
-# We ignore these directories to avoid leaking private documents, extraction chunks, 
-# chroma/qdrant databases, and evaluation logs.
-data/
+#data
+data/chromadb/
+data/qdrant/
 scratch/
 
 # OS/IDE generated files

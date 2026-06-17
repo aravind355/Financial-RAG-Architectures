@@ -1,0 +1,731 @@
+{
+  "model": "llama3.2:3b",
+  "embed_model": "all-MiniLM-L6-v2",
+  "rerank_model": "cross-encoder/ms-marco-MiniLM-L-6-v2",
+  "vector_db": "chromadb",
+  "num_chunks": 169,
+  "metrics": {
+    "avg_keyword_hit_rate": 0.575,
+    "right_page_in_top5": 1.0,
+    "right_type_in_top5": 0.7,
+    "top1_correct": 0.8
+  },
+  "per_question": [
+    {
+      "id": "Q01",
+      "question": "What was Apple's total net sales revenue in fiscal year 2023?",
+      "difficulty": "easy",
+      "answer": "According to Source [Source 1 | apple_2023.pdf | Page 31], Apple Inc.'s total net sales for the fiscal year ended September 30, 2023 was $383.285 billion.\n\nNote: This answer is based solely on the provided financial documents and does not include any external information or analysis.",
+      "answer_score": {
+        "keyword_score": 0.333,
+        "keywords_found": [
+          "383"
+        ],
+        "keywords_missed": [
+          "383,285",
+          "383.3"
+        ]
+      },
+      "retrieval_score": {
+        "right_type_in_top5": true,
+        "right_page_in_top5": true,
+        "top1_page_correct": true,
+        "retrieved_pages": [
+          31,
+          38,
+          23,
+          51,
+          25
+        ],
+        "retrieved_types": [
+          "text",
+          "text",
+          "text",
+          "text",
+          "text"
+        ]
+      },
+      "top_chunks": [
+        {
+          "page": "31",
+          "type": "text",
+          "dense_score": 0.6987,
+          "rerank_score": 6.3056,
+          "preview": "Apple Inc.\nCONSOLIDATED STATEMENTS OF OPERATIONS\n(In millions, except number of shares, which are re"
+        },
+        {
+          "page": "38",
+          "type": "text",
+          "dense_score": 0.7087,
+          "rerank_score": 5.3257,
+          "preview": "Net sales disaggregated by significant products and services for 2023, 2022 and 2021 were as follows"
+        },
+        {
+          "page": "23",
+          "type": "text",
+          "dense_score": 0.5203,
+          "rerank_score": 5.0974,
+          "preview": "Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations\nThe fo"
+        },
+        {
+          "page": "51",
+          "type": "text",
+          "dense_score": 0.6659,
+          "rerank_score": 4.3003,
+          "preview": "The U.S. and China were the only countries that accounted for more than 10% of the Company’s net sal"
+        },
+        {
+          "page": "25",
+          "type": "text",
+          "dense_score": 0.628,
+          "rerank_score": 4.0772,
+          "preview": "Products and Services Performance\nThe following table shows net sales by category for 2023, 2022 and"
+        }
+      ]
+    },
+    {
+      "id": "Q02",
+      "question": "How much did Apple spend on research and development in 2023?",
+      "difficulty": "easy",
+      "answer": "According to the financial documents, Apple spent $29,915 million on Research and Development in 2023.\n\nSource: [Source 1 | apple_2023.pdf | Page 28](#Ref-1)",
+      "answer_score": {
+        "keyword_score": 0.5,
+        "keywords_found": [
+          "29,915"
+        ],
+        "keywords_missed": [
+          "29915"
+        ]
+      },
+      "retrieval_score": {
+        "right_type_in_top5": false,
+        "right_page_in_top5": true,
+        "top1_page_correct": true,
+        "retrieved_pages": [
+          31,
+          35,
+          33,
+          34,
+          32
+        ],
+        "retrieved_types": [
+          "text",
+          "text",
+          "text",
+          "text",
+          "text"
+        ]
+      },
+      "top_chunks": [
+        {
+          "page": "31",
+          "type": "text",
+          "dense_score": 0.5423,
+          "rerank_score": 4.6628,
+          "preview": "Apple Inc.\nCONSOLIDATED STATEMENTS OF OPERATIONS\n(In millions, except number of shares, which are re"
+        },
+        {
+          "page": "35",
+          "type": "text",
+          "dense_score": 0.4487,
+          "rerank_score": 0.7429,
+          "preview": "Apple Inc.\nCONSOLIDATED STATEMENTS OF CASH FLOWS\n(In millions)\nYears ended\nSeptember 30, September 2"
+        },
+        {
+          "page": "33",
+          "type": "text",
+          "dense_score": 0.4265,
+          "rerank_score": 0.6948,
+          "preview": "Apple Inc.\nCONSOLIDATED BALANCE SHEETS\n(In millions, except number of shares, which are reflected in"
+        },
+        {
+          "page": "34",
+          "type": "text",
+          "dense_score": 0.5014,
+          "rerank_score": 0.6927,
+          "preview": "Apple Inc.\nCONSOLIDATED STATEMENTS OF SHAREHOLDERS’ EQUITY\n(In millions, except per-share amounts)\nY"
+        },
+        {
+          "page": "32",
+          "type": "text",
+          "dense_score": 0.371,
+          "rerank_score": 0.5236,
+          "preview": "Apple Inc.\nCONSOLIDATED STATEMENTS OF COMPREHENSIVE INCOME\n(In millions)\nYears ended\nSeptember 30, S"
+        }
+      ]
+    },
+    {
+      "id": "Q03",
+      "question": "What is Apple's net income for fiscal year 2023?",
+      "difficulty": "easy",
+      "answer": "According to Source 1, Page 32 of the 2023 Consolidated Financial Statements of Apple Inc.\n\nNet income for fiscal year 2023: $96,995 million.\n\nSource: Apple_2023.pdf | Page 32",
+      "answer_score": {
+        "keyword_score": 0.5,
+        "keywords_found": [
+          "96,995"
+        ],
+        "keywords_missed": [
+          "96995"
+        ]
+      },
+      "retrieval_score": {
+        "right_type_in_top5": true,
+        "right_page_in_top5": true,
+        "top1_page_correct": true,
+        "retrieved_pages": [
+          32,
+          31,
+          34,
+          35,
+          23
+        ],
+        "retrieved_types": [
+          "text",
+          "text",
+          "text",
+          "text",
+          "text"
+        ]
+      },
+      "top_chunks": [
+        {
+          "page": "32",
+          "type": "text",
+          "dense_score": 0.6137,
+          "rerank_score": 6.2198,
+          "preview": "Apple Inc.\nCONSOLIDATED STATEMENTS OF COMPREHENSIVE INCOME\n(In millions)\nYears ended\nSeptember 30, S"
+        },
+        {
+          "page": "31",
+          "type": "text",
+          "dense_score": 0.6614,
+          "rerank_score": 4.3883,
+          "preview": "Apple Inc.\nCONSOLIDATED STATEMENTS OF OPERATIONS\n(In millions, except number of shares, which are re"
+        },
+        {
+          "page": "34",
+          "type": "text",
+          "dense_score": 0.5701,
+          "rerank_score": 4.1498,
+          "preview": "Apple Inc.\nCONSOLIDATED STATEMENTS OF SHAREHOLDERS’ EQUITY\n(In millions, except per-share amounts)\nY"
+        },
+        {
+          "page": "35",
+          "type": "text",
+          "dense_score": 0.6343,
+          "rerank_score": 4.1463,
+          "preview": "Apple Inc.\nCONSOLIDATED STATEMENTS OF CASH FLOWS\n(In millions)\nYears ended\nSeptember 30, September 2"
+        },
+        {
+          "page": "23",
+          "type": "text",
+          "dense_score": 0.505,
+          "rerank_score": 4.1319,
+          "preview": "Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations\nThe fo"
+        }
+      ]
+    },
+    {
+      "id": "Q04",
+      "question": "What were Apple's iPhone net sales in 2023?",
+      "difficulty": "medium",
+      "answer": "According to Source 2 | apple_2023.pdf | Page 38, iPhone (1) net sales for 2023 was $200,583.\n\nAdditionally, on the same page, it is mentioned that \"The Company’s proportion of net sales by disaggregated revenue source was generally consistent for each reportable segment... The Company’s proportion of net sales by disaggregated revenue source was generally consistent for each reportable segment in Note 13, “Segment Information and Geographic Data” for 2023, 2022 and 2021...\"\n\nHowever, the table on Page 38 is actually a reproduction of the data from Source 1 | apple_2023.pdf | Page 25. Therefore, to confirm the answer:\n\nAccording to Source 1 | apple_2023.pdf | Page 25, iPhone (1) net sales for 2023 was $200,583.",
+      "answer_score": {
+        "keyword_score": 0.5,
+        "keywords_found": [
+          "200,583"
+        ],
+        "keywords_missed": [
+          "200583"
+        ]
+      },
+      "retrieval_score": {
+        "right_type_in_top5": true,
+        "right_page_in_top5": true,
+        "top1_page_correct": false,
+        "retrieved_pages": [
+          25,
+          38,
+          24,
+          23,
+          31
+        ],
+        "retrieved_types": [
+          "text",
+          "text",
+          "text",
+          "text",
+          "text"
+        ]
+      },
+      "top_chunks": [
+        {
+          "page": "25",
+          "type": "text",
+          "dense_score": 0.6974,
+          "rerank_score": 6.9714,
+          "preview": "Products and Services Performance\nThe following table shows net sales by category for 2023, 2022 and"
+        },
+        {
+          "page": "38",
+          "type": "text",
+          "dense_score": 0.721,
+          "rerank_score": 6.7904,
+          "preview": "Net sales disaggregated by significant products and services for 2023, 2022 and 2021 were as follows"
+        },
+        {
+          "page": "24",
+          "type": "text",
+          "dense_score": 0.5051,
+          "rerank_score": 5.6057,
+          "preview": "Segment Operating Performance\nThe following table shows net sales by reportable segment for 2023, 20"
+        },
+        {
+          "page": "23",
+          "type": "text",
+          "dense_score": 0.404,
+          "rerank_score": 4.9752,
+          "preview": "Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations\nThe fo"
+        },
+        {
+          "page": "31",
+          "type": "text",
+          "dense_score": 0.5669,
+          "rerank_score": 4.9257,
+          "preview": "Apple Inc.\nCONSOLIDATED STATEMENTS OF OPERATIONS\n(In millions, except number of shares, which are re"
+        }
+      ]
+    },
+    {
+      "id": "Q05",
+      "question": "What is Apple's total assets value on the balance sheet?",
+      "difficulty": "medium",
+      "answer": "According to the provided financial documents, Apple's total assets value on the balance sheet for September 30, 2023, is $352,583 million.\n\nSource: [Source 1 | apple_2023.pdf | Page 33]",
+      "answer_score": {
+        "keyword_score": 0.5,
+        "keywords_found": [
+          "352,583"
+        ],
+        "keywords_missed": [
+          "352583"
+        ]
+      },
+      "retrieval_score": {
+        "right_type_in_top5": true,
+        "right_page_in_top5": true,
+        "top1_page_correct": true,
+        "retrieved_pages": [
+          33,
+          34,
+          35,
+          32,
+          36
+        ],
+        "retrieved_types": [
+          "text",
+          "text",
+          "text",
+          "text",
+          "text"
+        ]
+      },
+      "top_chunks": [
+        {
+          "page": "33",
+          "type": "text",
+          "dense_score": 0.7664,
+          "rerank_score": 7.0227,
+          "preview": "Apple Inc.\nCONSOLIDATED BALANCE SHEETS\n(In millions, except number of shares, which are reflected in"
+        },
+        {
+          "page": "34",
+          "type": "text",
+          "dense_score": 0.6105,
+          "rerank_score": 3.2351,
+          "preview": "Apple Inc.\nCONSOLIDATED STATEMENTS OF SHAREHOLDERS’ EQUITY\n(In millions, except per-share amounts)\nY"
+        },
+        {
+          "page": "35",
+          "type": "text",
+          "dense_score": 0.6433,
+          "rerank_score": 1.8653,
+          "preview": "Apple Inc.\nCONSOLIDATED STATEMENTS OF CASH FLOWS\n(In millions)\nYears ended\nSeptember 30, September 2"
+        },
+        {
+          "page": "32",
+          "type": "text",
+          "dense_score": 0.5509,
+          "rerank_score": -0.7175,
+          "preview": "Apple Inc.\nCONSOLIDATED STATEMENTS OF COMPREHENSIVE INCOME\n(In millions)\nYears ended\nSeptember 30, S"
+        },
+        {
+          "page": "36",
+          "type": "text",
+          "dense_score": 0.5818,
+          "rerank_score": -0.9201,
+          "preview": "Apple Inc.\nNotes to Consolidated Financial Statements\nNote 1 – Summary of Significant Accounting Pol"
+        }
+      ]
+    },
+    {
+      "id": "Q06",
+      "question": "What are the main categories of risk factors Apple identifies?",
+      "difficulty": "medium",
+      "answer": "The main categories of risk factors that Apple identifies are:\n\n1. Macroeconomic and Industry Risks\n2. Political Events, Trade Disputes, War, Terrorism, Natural Disasters, Public Health Issues, Industrial Accidents, and Other Business Interruptions (Source: Item 1A. Risk Factors | Page 5)\n3. Credit Risk (Source: Financial Risks | Page 18)\n\nThese categories are not exhaustive, as the document also mentions other potential risks such as changes in foreign exchange rates, inflation, and market volatility.\n\n Source: Item 1A. Risk Factors | Pages 4-5\n Financial Risks | Page 15",
+      "answer_score": {
+        "keyword_score": 0.75,
+        "keywords_found": [
+          "macroeconomic",
+          "financial",
+          "risk"
+        ],
+        "keywords_missed": [
+          "legal"
+        ]
+      },
+      "retrieval_score": {
+        "right_type_in_top5": true,
+        "right_page_in_top5": true,
+        "top1_page_correct": false,
+        "retrieved_pages": [
+          3,
+          8,
+          52,
+          54,
+          18
+        ],
+        "retrieved_types": [
+          "text",
+          "text",
+          "text",
+          "text",
+          "text"
+        ]
+      },
+      "top_chunks": [
+        {
+          "page": "3",
+          "type": "text",
+          "dense_score": 0.5431,
+          "rerank_score": -1.3169,
+          "preview": "Apple Inc.\nForm 10-K\nFor the Fiscal Year Ended September 30, 2023\nTABLE OF CONTENTS\nPage\nPart I\nItem"
+        },
+        {
+          "page": "8",
+          "type": "text",
+          "dense_score": 0.4368,
+          "rerank_score": -3.2318,
+          "preview": "Item 1A. Risk Factors\nThe Company’s business, reputation, results of operations, financial condition"
+        },
+        {
+          "page": "52",
+          "type": "text",
+          "dense_score": 0.3961,
+          "rerank_score": -5.6452,
+          "preview": "Report of Independent Registered Public Accounting Firm\nTo the Shareholders and the Board of Directo"
+        },
+        {
+          "page": "54",
+          "type": "text",
+          "dense_score": 0.3772,
+          "rerank_score": -5.7288,
+          "preview": "Report of Independent Registered Public Accounting Firm\nTo the Shareholders and the Board of Directo"
+        },
+        {
+          "page": "18",
+          "type": "text",
+          "dense_score": 0.3592,
+          "rerank_score": -6.8529,
+          "preview": "Financial Risks\nThe Company expects its quarterly net sales and results of operations to fluctuate.\n"
+        }
+      ]
+    },
+    {
+      "id": "Q07",
+      "question": "How much did Apple pay in dividends in 2023?",
+      "difficulty": "hard",
+      "answer": "According to the provided financial documents, Apple paid $15,025 for dividends and dividend equivalents declared in 2023.\n\nSource: [Source 2 | apple_2023.pdf | Page 35 | Type: text]",
+      "answer_score": {
+        "keyword_score": 0.667,
+        "keywords_found": [
+          "dividend",
+          "15,025"
+        ],
+        "keywords_missed": [
+          "14,996"
+        ]
+      },
+      "retrieval_score": {
+        "right_type_in_top5": false,
+        "right_page_in_top5": true,
+        "top1_page_correct": true,
+        "retrieved_pages": [
+          34,
+          35,
+          33,
+          32,
+          31
+        ],
+        "retrieved_types": [
+          "text",
+          "text",
+          "text",
+          "text",
+          "text"
+        ]
+      },
+      "top_chunks": [
+        {
+          "page": "34",
+          "type": "text",
+          "dense_score": 0.6533,
+          "rerank_score": 6.5626,
+          "preview": "Apple Inc.\nCONSOLIDATED STATEMENTS OF SHAREHOLDERS’ EQUITY\n(In millions, except per-share amounts)\nY"
+        },
+        {
+          "page": "35",
+          "type": "text",
+          "dense_score": 0.5282,
+          "rerank_score": 4.8321,
+          "preview": "Apple Inc.\nCONSOLIDATED STATEMENTS OF CASH FLOWS\n(In millions)\nYears ended\nSeptember 30, September 2"
+        },
+        {
+          "page": "33",
+          "type": "text",
+          "dense_score": 0.5019,
+          "rerank_score": 3.5919,
+          "preview": "Apple Inc.\nCONSOLIDATED BALANCE SHEETS\n(In millions, except number of shares, which are reflected in"
+        },
+        {
+          "page": "32",
+          "type": "text",
+          "dense_score": 0.5035,
+          "rerank_score": 3.432,
+          "preview": "Apple Inc.\nCONSOLIDATED STATEMENTS OF COMPREHENSIVE INCOME\n(In millions)\nYears ended\nSeptember 30, S"
+        },
+        {
+          "page": "31",
+          "type": "text",
+          "dense_score": 0.5534,
+          "rerank_score": 2.3128,
+          "preview": "Apple Inc.\nCONSOLIDATED STATEMENTS OF OPERATIONS\n(In millions, except number of shares, which are re"
+        }
+      ]
+    },
+    {
+      "id": "Q08",
+      "question": "What is Apple's operating income for 2023?",
+      "difficulty": "hard",
+      "answer": "According to the provided financial documents, Apple's operating income for 2023 is $114,301 million.\n\nSource: [Apple_2023.pdf | Page 28]",
+      "answer_score": {
+        "keyword_score": 0.5,
+        "keywords_found": [
+          "114,301"
+        ],
+        "keywords_missed": [
+          "114301"
+        ]
+      },
+      "retrieval_score": {
+        "right_type_in_top5": true,
+        "right_page_in_top5": true,
+        "top1_page_correct": true,
+        "retrieved_pages": [
+          31,
+          35,
+          32,
+          34,
+          38
+        ],
+        "retrieved_types": [
+          "text",
+          "text",
+          "text",
+          "text",
+          "text"
+        ]
+      },
+      "top_chunks": [
+        {
+          "page": "31",
+          "type": "text",
+          "dense_score": 0.7028,
+          "rerank_score": 5.8556,
+          "preview": "Apple Inc.\nCONSOLIDATED STATEMENTS OF OPERATIONS\n(In millions, except number of shares, which are re"
+        },
+        {
+          "page": "35",
+          "type": "text",
+          "dense_score": 0.6225,
+          "rerank_score": 5.6338,
+          "preview": "Apple Inc.\nCONSOLIDATED STATEMENTS OF CASH FLOWS\n(In millions)\nYears ended\nSeptember 30, September 2"
+        },
+        {
+          "page": "32",
+          "type": "text",
+          "dense_score": 0.5754,
+          "rerank_score": 4.9677,
+          "preview": "Apple Inc.\nCONSOLIDATED STATEMENTS OF COMPREHENSIVE INCOME\n(In millions)\nYears ended\nSeptember 30, S"
+        },
+        {
+          "page": "34",
+          "type": "text",
+          "dense_score": 0.5929,
+          "rerank_score": 3.9064,
+          "preview": "Apple Inc.\nCONSOLIDATED STATEMENTS OF SHAREHOLDERS’ EQUITY\n(In millions, except per-share amounts)\nY"
+        },
+        {
+          "page": "38",
+          "type": "text",
+          "dense_score": 0.5952,
+          "rerank_score": 2.6747,
+          "preview": "Net sales disaggregated by significant products and services for 2023, 2022 and 2021 were as follows"
+        }
+      ]
+    },
+    {
+      "id": "Q09",
+      "question": "What segments does Apple report revenue by geographically?",
+      "difficulty": "medium",
+      "answer": "According to the provided financial documents, Apple reports revenue by geographic segment as follows:\n\n1. Americas\n2. Europe\n3. Greater China\n4. Japan\n5. Rest of Asia Pacific\n\nThis information is shown in Note 13 - Segment Information and Geographic Data (Source: apple_2023.pdf | Page 50)",
+      "answer_score": {
+        "keyword_score": 1.0,
+        "keywords_found": [
+          "Americas",
+          "Europe",
+          "China",
+          "Japan",
+          "rest of asia"
+        ],
+        "keywords_missed": []
+      },
+      "retrieval_score": {
+        "right_type_in_top5": true,
+        "right_page_in_top5": true,
+        "top1_page_correct": true,
+        "retrieved_pages": [
+          50,
+          24,
+          38,
+          54,
+          52
+        ],
+        "retrieved_types": [
+          "text",
+          "text",
+          "text",
+          "text",
+          "text"
+        ]
+      },
+      "top_chunks": [
+        {
+          "page": "50",
+          "type": "text",
+          "dense_score": 0.6384,
+          "rerank_score": 0.3999,
+          "preview": "Note 13 – Segment Information and Geographic Data\nThe Company manages its business primarily on a ge"
+        },
+        {
+          "page": "24",
+          "type": "text",
+          "dense_score": 0.4704,
+          "rerank_score": -1.2731,
+          "preview": "Segment Operating Performance\nThe following table shows net sales by reportable segment for 2023, 20"
+        },
+        {
+          "page": "38",
+          "type": "text",
+          "dense_score": 0.45,
+          "rerank_score": -1.7106,
+          "preview": "Net sales disaggregated by significant products and services for 2023, 2022 and 2021 were as follows"
+        },
+        {
+          "page": "54",
+          "type": "text",
+          "dense_score": 0.4761,
+          "rerank_score": -4.6097,
+          "preview": "Report of Independent Registered Public Accounting Firm\nTo the Shareholders and the Board of Directo"
+        },
+        {
+          "page": "52",
+          "type": "text",
+          "dense_score": 0.4947,
+          "rerank_score": -4.7408,
+          "preview": "Report of Independent Registered Public Accounting Firm\nTo the Shareholders and the Board of Directo"
+        }
+      ]
+    },
+    {
+      "id": "Q10",
+      "question": "What were Apple's total liabilities in 2023?",
+      "difficulty": "hard",
+      "answer": "According to the Consolidated Balance Sheets, Apple's Total Liabilities in 2023 were $290,437 million.\n\nSource: [Apple_2023.pdf | Page 32]",
+      "answer_score": {
+        "keyword_score": 0.5,
+        "keywords_found": [
+          "290,437"
+        ],
+        "keywords_missed": [
+          "290437"
+        ]
+      },
+      "retrieval_score": {
+        "right_type_in_top5": false,
+        "right_page_in_top5": true,
+        "top1_page_correct": true,
+        "retrieved_pages": [
+          33,
+          34,
+          35,
+          36,
+          52
+        ],
+        "retrieved_types": [
+          "text",
+          "text",
+          "text",
+          "text",
+          "text"
+        ]
+      },
+      "top_chunks": [
+        {
+          "page": "33",
+          "type": "text",
+          "dense_score": 0.637,
+          "rerank_score": 5.7071,
+          "preview": "Apple Inc.\nCONSOLIDATED BALANCE SHEETS\n(In millions, except number of shares, which are reflected in"
+        },
+        {
+          "page": "34",
+          "type": "text",
+          "dense_score": 0.6203,
+          "rerank_score": 3.3066,
+          "preview": "Apple Inc.\nCONSOLIDATED STATEMENTS OF SHAREHOLDERS’ EQUITY\n(In millions, except per-share amounts)\nY"
+        },
+        {
+          "page": "35",
+          "type": "text",
+          "dense_score": 0.6911,
+          "rerank_score": 2.8591,
+          "preview": "Apple Inc.\nCONSOLIDATED STATEMENTS OF CASH FLOWS\n(In millions)\nYears ended\nSeptember 30, September 2"
+        },
+        {
+          "page": "36",
+          "type": "text",
+          "dense_score": 0.6069,
+          "rerank_score": 2.2355,
+          "preview": "Apple Inc.\nNotes to Consolidated Financial Statements\nNote 1 – Summary of Significant Accounting Pol"
+        },
+        {
+          "page": "52",
+          "type": "text",
+          "dense_score": 0.5667,
+          "rerank_score": 1.2368,
+          "preview": "Report of Independent Registered Public Accounting Firm\nTo the Shareholders and the Board of Directo"
+        }
+      ]
+    }
+  ]
+}
