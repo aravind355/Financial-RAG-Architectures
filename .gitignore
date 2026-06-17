@@ -1,0 +1,21 @@
+# Virtual Environments
+ragenv/
+venv/
+.env
+
+# Python Cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Data, Evaluation and Temporary Storage
+# We ignore these directories to avoid leaking private documents, extraction chunks, 
+# chroma/qdrant databases, and evaluation logs.
+data/
+scratch/
+
+# OS/IDE generated files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
