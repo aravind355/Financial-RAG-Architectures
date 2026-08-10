@@ -1,0 +1,3470 @@
+[
+  {
+    "id": "num_01",
+    "intent": "Numerical",
+    "pre_text": [
+      "Apple Inc. CONSOLIDATED STATEMENTS OF OPERATIONS (In millions)",
+      "Years ended September 30, 2023 and September 24, 2022."
+    ],
+    "post_text": [
+      "All figures are in millions."
+    ],
+    "table": [
+      [
+        "",
+        "2023",
+        "2022",
+        "2021"
+      ],
+      [
+        "Products net sales",
+        "298085",
+        "316199",
+        "297392"
+      ],
+      [
+        "Services net sales",
+        "85200",
+        "78129",
+        "68425"
+      ],
+      [
+        "Total net sales",
+        "383285",
+        "394328",
+        "365817"
+      ],
+      [
+        "Total cost of sales",
+        "214137",
+        "223546",
+        "212981"
+      ],
+      [
+        "Gross margin",
+        "169148",
+        "170782",
+        "152836"
+      ],
+      [
+        "Research and development",
+        "29915",
+        "26251",
+        "21914"
+      ],
+      [
+        "Selling, general and administrative",
+        "24932",
+        "25094",
+        "21973"
+      ],
+      [
+        "Total operating expenses",
+        "54847",
+        "51345",
+        "43887"
+      ],
+      [
+        "Operating income",
+        "114301",
+        "119437",
+        "108949"
+      ],
+      [
+        "Net income",
+        "96995",
+        "99803",
+        "94680"
+      ]
+    ],
+    "qa": {
+      "question": "What is the percentage change in total net sales from 2022 to 2023?",
+      "program": "percentage_change(394328, 383285)",
+      "exe_ans": -0.028
+    },
+    "source": "apple_2023.pdf"
+  },
+  {
+    "id": "num_02",
+    "intent": "Numerical",
+    "pre_text": [
+      "Apple Inc. CONSOLIDATED STATEMENTS OF OPERATIONS (In millions)",
+      "Years ended September 30, 2023 and September 24, 2022."
+    ],
+    "post_text": [
+      "All figures are in millions."
+    ],
+    "table": [
+      [
+        "",
+        "2023",
+        "2022",
+        "2021"
+      ],
+      [
+        "Products net sales",
+        "298085",
+        "316199",
+        "297392"
+      ],
+      [
+        "Services net sales",
+        "85200",
+        "78129",
+        "68425"
+      ],
+      [
+        "Total net sales",
+        "383285",
+        "394328",
+        "365817"
+      ],
+      [
+        "Total cost of sales",
+        "214137",
+        "223546",
+        "212981"
+      ],
+      [
+        "Gross margin",
+        "169148",
+        "170782",
+        "152836"
+      ],
+      [
+        "Research and development",
+        "29915",
+        "26251",
+        "21914"
+      ],
+      [
+        "Selling, general and administrative",
+        "24932",
+        "25094",
+        "21973"
+      ],
+      [
+        "Total operating expenses",
+        "54847",
+        "51345",
+        "43887"
+      ],
+      [
+        "Operating income",
+        "114301",
+        "119437",
+        "108949"
+      ],
+      [
+        "Net income",
+        "96995",
+        "99803",
+        "94680"
+      ]
+    ],
+    "qa": {
+      "question": "What is the difference between research and development expenses in 2023 and 2022?",
+      "program": "subtract(29915, 26251)",
+      "exe_ans": 3664.0
+    },
+    "source": "apple_2023.pdf"
+  },
+  {
+    "id": "num_03",
+    "intent": "Numerical",
+    "pre_text": [
+      "Apple Inc. CONSOLIDATED STATEMENTS OF OPERATIONS (In millions)",
+      "Years ended September 30, 2023 and September 24, 2022."
+    ],
+    "post_text": [
+      "All figures are in millions."
+    ],
+    "table": [
+      [
+        "",
+        "2023",
+        "2022",
+        "2021"
+      ],
+      [
+        "Products net sales",
+        "298085",
+        "316199",
+        "297392"
+      ],
+      [
+        "Services net sales",
+        "85200",
+        "78129",
+        "68425"
+      ],
+      [
+        "Total net sales",
+        "383285",
+        "394328",
+        "365817"
+      ],
+      [
+        "Gross margin",
+        "169148",
+        "170782",
+        "152836"
+      ],
+      [
+        "Operating income",
+        "114301",
+        "119437",
+        "108949"
+      ],
+      [
+        "Net income",
+        "96995",
+        "99803",
+        "94680"
+      ]
+    ],
+    "qa": {
+      "question": "What is the gross margin as a percentage of total net sales in 2023?",
+      "program": "percentage(169148, 383285)",
+      "exe_ans": 44.13
+    },
+    "source": "apple_2023.pdf"
+  },
+  {
+    "id": "num_04",
+    "intent": "Numerical",
+    "pre_text": [
+      "Net sales disaggregated by significant products and services for 2023, 2022 and 2021 were as follows (in millions)."
+    ],
+    "post_text": [],
+    "table": [
+      [
+        "",
+        "2023",
+        "2022",
+        "2021"
+      ],
+      [
+        "iPhone",
+        "200583",
+        "205489",
+        "191973"
+      ],
+      [
+        "Mac",
+        "29357",
+        "40177",
+        "35190"
+      ],
+      [
+        "iPad",
+        "28300",
+        "29292",
+        "31862"
+      ],
+      [
+        "Wearables, Home and Accessories",
+        "39845",
+        "41241",
+        "38367"
+      ],
+      [
+        "Services",
+        "85200",
+        "78129",
+        "68425"
+      ],
+      [
+        "Total net sales",
+        "383285",
+        "394328",
+        "365817"
+      ]
+    ],
+    "qa": {
+      "question": "What is the percentage change in Mac sales from 2022 to 2023?",
+      "program": "percentage_change(40177, 29357)",
+      "exe_ans": -0.2693
+    },
+    "source": "apple_2023.pdf"
+  },
+  {
+    "id": "num_05",
+    "intent": "Numerical",
+    "pre_text": [
+      "Net sales disaggregated by significant products and services for 2023, 2022 and 2021 were as follows (in millions)."
+    ],
+    "post_text": [],
+    "table": [
+      [
+        "",
+        "2023",
+        "2022",
+        "2021"
+      ],
+      [
+        "iPhone",
+        "200583",
+        "205489",
+        "191973"
+      ],
+      [
+        "Mac",
+        "29357",
+        "40177",
+        "35190"
+      ],
+      [
+        "iPad",
+        "28300",
+        "29292",
+        "31862"
+      ],
+      [
+        "Wearables, Home and Accessories",
+        "39845",
+        "41241",
+        "38367"
+      ],
+      [
+        "Services",
+        "85200",
+        "78129",
+        "68425"
+      ],
+      [
+        "Total net sales",
+        "383285",
+        "394328",
+        "365817"
+      ]
+    ],
+    "qa": {
+      "question": "What is the sum of iPhone and Services net sales in 2023?",
+      "program": "add(200583, 85200)",
+      "exe_ans": 285783.0
+    },
+    "source": "apple_2023.pdf"
+  },
+  {
+    "id": "num_06",
+    "intent": "Numerical",
+    "pre_text": [
+      "The following table shows net sales by reportable segment for 2023, 2022 and 2021 (dollars in millions)."
+    ],
+    "post_text": [],
+    "table": [
+      [
+        "",
+        "2023",
+        "2022",
+        "2021"
+      ],
+      [
+        "Americas",
+        "162560",
+        "169658",
+        "153306"
+      ],
+      [
+        "Europe",
+        "94294",
+        "95118",
+        "89307"
+      ],
+      [
+        "Greater China",
+        "72559",
+        "74200",
+        "68366"
+      ],
+      [
+        "Japan",
+        "24257",
+        "25977",
+        "28482"
+      ],
+      [
+        "Rest of Asia Pacific",
+        "29615",
+        "29375",
+        "26356"
+      ],
+      [
+        "Total net sales",
+        "383285",
+        "394328",
+        "365817"
+      ]
+    ],
+    "qa": {
+      "question": "What is the percentage change in Greater China net sales from 2022 to 2023?",
+      "program": "percentage_change(74200, 72559)",
+      "exe_ans": -0.0221
+    },
+    "source": "apple_2023.pdf"
+  },
+  {
+    "id": "num_07",
+    "intent": "Numerical",
+    "pre_text": [
+      "The following table shows net sales by reportable segment for 2023, 2022 and 2021 (dollars in millions)."
+    ],
+    "post_text": [],
+    "table": [
+      [
+        "",
+        "2023",
+        "2022",
+        "2021"
+      ],
+      [
+        "Americas",
+        "162560",
+        "169658",
+        "153306"
+      ],
+      [
+        "Europe",
+        "94294",
+        "95118",
+        "89307"
+      ],
+      [
+        "Greater China",
+        "72559",
+        "74200",
+        "68366"
+      ],
+      [
+        "Japan",
+        "24257",
+        "25977",
+        "28482"
+      ],
+      [
+        "Rest of Asia Pacific",
+        "29615",
+        "29375",
+        "26356"
+      ],
+      [
+        "Total net sales",
+        "383285",
+        "394328",
+        "365817"
+      ]
+    ],
+    "qa": {
+      "question": "What is the ratio of Americas net sales to Europe net sales in 2023?",
+      "program": "divide(162560, 94294)",
+      "exe_ans": 1.7239
+    },
+    "source": "apple_2023.pdf"
+  },
+  {
+    "id": "num_08",
+    "intent": "Numerical",
+    "pre_text": [
+      "The following table shows net sales by reportable segment for 2023, 2022 and 2021 (dollars in millions)."
+    ],
+    "post_text": [],
+    "table": [
+      [
+        "",
+        "2023",
+        "2022",
+        "2021"
+      ],
+      [
+        "Americas",
+        "162560",
+        "169658",
+        "153306"
+      ],
+      [
+        "Europe",
+        "94294",
+        "95118",
+        "89307"
+      ],
+      [
+        "Greater China",
+        "72559",
+        "74200",
+        "68366"
+      ],
+      [
+        "Japan",
+        "24257",
+        "25977",
+        "28482"
+      ],
+      [
+        "Rest of Asia Pacific",
+        "29615",
+        "29375",
+        "26356"
+      ],
+      [
+        "Total net sales",
+        "383285",
+        "394328",
+        "365817"
+      ]
+    ],
+    "qa": {
+      "question": "What is the difference in Japan net sales between 2022 and 2023?",
+      "program": "subtract(25977, 24257)",
+      "exe_ans": 1720.0
+    },
+    "source": "apple_2023.pdf"
+  },
+  {
+    "id": "num_09",
+    "intent": "Numerical",
+    "pre_text": [
+      "Products and Services gross margin and gross margin percentage for 2023, 2022 and 2021 were as follows (dollars in millions)."
+    ],
+    "post_text": [],
+    "table": [
+      [
+        "",
+        "2023",
+        "2022",
+        "2021"
+      ],
+      [
+        "Products gross margin",
+        "108803",
+        "114728",
+        "105126"
+      ],
+      [
+        "Services gross margin",
+        "60345",
+        "56054",
+        "47710"
+      ],
+      [
+        "Total gross margin",
+        "169148",
+        "170782",
+        "152836"
+      ]
+    ],
+    "qa": {
+      "question": "What is the sum of Products gross margin and Services gross margin in 2022?",
+      "program": "add(114728, 56054)",
+      "exe_ans": 170782.0
+    },
+    "source": "apple_2023.pdf"
+  },
+  {
+    "id": "num_10",
+    "intent": "Numerical",
+    "pre_text": [
+      "Products and Services gross margin and gross margin percentage for 2023, 2022 and 2021 were as follows (dollars in millions)."
+    ],
+    "post_text": [],
+    "table": [
+      [
+        "",
+        "2023",
+        "2022",
+        "2021"
+      ],
+      [
+        "Products gross margin",
+        "108803",
+        "114728",
+        "105126"
+      ],
+      [
+        "Services gross margin",
+        "60345",
+        "56054",
+        "47710"
+      ],
+      [
+        "Total gross margin",
+        "169148",
+        "170782",
+        "152836"
+      ]
+    ],
+    "qa": {
+      "question": "What is the percentage change in Services gross margin from 2022 to 2023?",
+      "program": "percentage_change(56054, 60345)",
+      "exe_ans": 0.0766
+    },
+    "source": "apple_2023.pdf"
+  },
+  {
+    "id": "num_11",
+    "intent": "Numerical",
+    "pre_text": [
+      "Provision for income taxes, effective tax rate and statutory federal income tax rate for 2023, 2022 and 2021 were as follows (dollars in millions)."
+    ],
+    "post_text": [],
+    "table": [
+      [
+        "",
+        "2023",
+        "2022",
+        "2021"
+      ],
+      [
+        "Provision for income taxes",
+        "16741",
+        "19300",
+        "14527"
+      ],
+      [
+        "Effective tax rate",
+        "14.7%",
+        "16.2%",
+        "13.3%"
+      ]
+    ],
+    "qa": {
+      "question": "What is the difference in provision for income taxes between 2022 and 2023?",
+      "program": "subtract(19300, 16741)",
+      "exe_ans": 2559.0
+    },
+    "source": "apple_2023.pdf"
+  },
+  {
+    "id": "num_12",
+    "intent": "Numerical",
+    "pre_text": [
+      "Apple Inc. CONSOLIDATED BALANCE SHEETS (In millions)",
+      "As of September 30, 2023 and September 24, 2022."
+    ],
+    "post_text": [],
+    "table": [
+      [
+        "",
+        "2023",
+        "2022"
+      ],
+      [
+        "Cash and cash equivalents",
+        "29965",
+        "23646"
+      ],
+      [
+        "Marketable securities (current)",
+        "31590",
+        "24658"
+      ],
+      [
+        "Accounts receivable, net",
+        "29508",
+        "28184"
+      ],
+      [
+        "Vendor non-trade receivables",
+        "31477",
+        "32748"
+      ],
+      [
+        "Inventories",
+        "6331",
+        "4946"
+      ],
+      [
+        "Other current assets",
+        "14695",
+        "21223"
+      ],
+      [
+        "Total current assets",
+        "143566",
+        "135405"
+      ],
+      [
+        "Marketable securities (non-current)",
+        "100544",
+        "120805"
+      ],
+      [
+        "Property, plant and equipment, net",
+        "43715",
+        "42117"
+      ],
+      [
+        "Other non-current assets",
+        "64758",
+        "54428"
+      ],
+      [
+        "Total non-current assets",
+        "209017",
+        "217350"
+      ],
+      [
+        "Total assets",
+        "352583",
+        "352755"
+      ]
+    ],
+    "qa": {
+      "question": "What is the percentage change in cash and cash equivalents from 2022 to 2023?",
+      "program": "percentage_change(23646, 29965)",
+      "exe_ans": 0.2672
+    },
+    "source": "apple_2023.pdf"
+  },
+  {
+    "id": "num_13",
+    "intent": "Numerical",
+    "pre_text": [
+      "Apple Inc. CONSOLIDATED BALANCE SHEETS (In millions)",
+      "As of September 30, 2023 and September 24, 2022."
+    ],
+    "post_text": [],
+    "table": [
+      [
+        "",
+        "2023",
+        "2022"
+      ],
+      [
+        "Cash and cash equivalents",
+        "29965",
+        "23646"
+      ],
+      [
+        "Marketable securities (current)",
+        "31590",
+        "24658"
+      ],
+      [
+        "Accounts receivable, net",
+        "29508",
+        "28184"
+      ],
+      [
+        "Total current assets",
+        "143566",
+        "135405"
+      ],
+      [
+        "Total assets",
+        "352583",
+        "352755"
+      ]
+    ],
+    "qa": {
+      "question": "What is the sum of cash and cash equivalents and current marketable securities in 2023?",
+      "program": "add(29965, 31590)",
+      "exe_ans": 61555.0
+    },
+    "source": "apple_2023.pdf"
+  },
+  {
+    "id": "num_14",
+    "intent": "Numerical",
+    "pre_text": [
+      "Apple Inc. CONSOLIDATED BALANCE SHEETS (In millions)",
+      "As of September 30, 2023 and September 24, 2022."
+    ],
+    "post_text": [],
+    "table": [
+      [
+        "",
+        "2023",
+        "2022"
+      ],
+      [
+        "Accounts payable",
+        "62611",
+        "64115"
+      ],
+      [
+        "Other current liabilities",
+        "58829",
+        "60845"
+      ],
+      [
+        "Deferred revenue",
+        "8061",
+        "7912"
+      ],
+      [
+        "Commercial paper",
+        "5985",
+        "9982"
+      ],
+      [
+        "Current portion of term debt",
+        "9822",
+        "11128"
+      ],
+      [
+        "Total current liabilities",
+        "145308",
+        "153982"
+      ]
+    ],
+    "qa": {
+      "question": "What is the difference in total current liabilities between 2022 and 2023?",
+      "program": "subtract(153982, 145308)",
+      "exe_ans": 8674.0
+    },
+    "source": "apple_2023.pdf"
+  },
+  {
+    "id": "num_15",
+    "intent": "Numerical",
+    "pre_text": [
+      "Apple Inc. CONSOLIDATED BALANCE SHEETS (In millions)",
+      "As of September 30, 2023 and September 24, 2022."
+    ],
+    "post_text": [],
+    "table": [
+      [
+        "",
+        "2023",
+        "2022"
+      ],
+      [
+        "Total current assets",
+        "143566",
+        "135405"
+      ],
+      [
+        "Total current liabilities",
+        "145308",
+        "153982"
+      ]
+    ],
+    "qa": {
+      "question": "What is the ratio of total current assets to total current liabilities in 2023?",
+      "program": "divide(143566, 145308)",
+      "exe_ans": 0.988
+    },
+    "source": "apple_2023.pdf"
+  },
+  {
+    "id": "num_16",
+    "intent": "Numerical",
+    "pre_text": [
+      "The following table provides a summary of the Company's term debt as of September 30, 2023 and September 24, 2022 (in millions)."
+    ],
+    "post_text": [],
+    "table": [
+      [
+        "",
+        "2023",
+        "2022"
+      ],
+      [
+        "Total term debt principal",
+        "106572",
+        "111824"
+      ],
+      [
+        "Total term debt",
+        "105103",
+        "110087"
+      ],
+      [
+        "Current portion of term debt",
+        "9822",
+        "11128"
+      ],
+      [
+        "Total non-current portion of term debt",
+        "95281",
+        "98959"
+      ]
+    ],
+    "qa": {
+      "question": "What is the percentage change in total term debt principal from 2022 to 2023?",
+      "program": "percentage_change(111824, 106572)",
+      "exe_ans": -0.047
+    },
+    "source": "apple_2023.pdf"
+  },
+  {
+    "id": "num_17",
+    "intent": "Numerical",
+    "pre_text": [
+      "Lease liability information as of September 30, 2023 and September 24, 2022 (in millions)."
+    ],
+    "post_text": [],
+    "table": [
+      [
+        "",
+        "2023",
+        "2022"
+      ],
+      [
+        "Operating lease right-of-use assets",
+        "10661",
+        "10417"
+      ],
+      [
+        "Finance lease right-of-use assets",
+        "1015",
+        "952"
+      ],
+      [
+        "Total right-of-use assets",
+        "11676",
+        "11369"
+      ],
+      [
+        "Total lease liabilities",
+        "12842",
+        "12411"
+      ]
+    ],
+    "qa": {
+      "question": "What is the sum of total lease liabilities for 2023 and 2022?",
+      "program": "add(12842, 12411)",
+      "exe_ans": 25253.0
+    },
+    "source": "apple_2023.pdf"
+  },
+  {
+    "id": "num_18",
+    "intent": "Numerical",
+    "pre_text": [
+      "Lease liability maturities as of September 30, 2023, are as follows (in millions)."
+    ],
+    "post_text": [],
+    "table": [
+      [
+        "Year",
+        "Operating Leases",
+        "Finance Leases",
+        "Total"
+      ],
+      [
+        "2024",
+        "1719",
+        "196",
+        "1915"
+      ],
+      [
+        "Yr2025",
+        "1875",
+        "151",
+        "2026"
+      ],
+      [
+        "2026",
+        "1732",
+        "120",
+        "1852"
+      ],
+      [
+        "2027",
+        "1351",
+        "52",
+        "1403"
+      ],
+      [
+        "2028",
+        "1181",
+        "34",
+        "1215"
+      ],
+      [
+        "Thereafter",
+        "5983",
+        "872",
+        "6855"
+      ],
+      [
+        "Total undiscounted liabilities",
+        "13841",
+        "1425",
+        "15266"
+      ],
+      [
+        "Less: Imputed interest",
+        "2023",
+        "401",
+        "2424"
+      ],
+      [
+        "Total lease liabilities",
+        "11818",
+        "1024",
+        "12842"
+      ]
+    ],
+    "qa": {
+      "question": "What is the ratio of operating lease liabilities to finance lease liabilities for 2024 maturities?",
+      "program": "divide(1719, 196)",
+      "exe_ans": 8.7704
+    },
+    "source": "apple_2023.pdf"
+  },
+  {
+    "id": "num_19",
+    "intent": "Numerical",
+    "pre_text": [
+      "Net sales disaggregated by significant products and services for 2023, 2022 and 2021 were as follows (in millions)."
+    ],
+    "post_text": [],
+    "table": [
+      [
+        "",
+        "2023",
+        "2022",
+        "2021"
+      ],
+      [
+        "iPhone",
+        "200583",
+        "205489",
+        "191973"
+      ],
+      [
+        "Mac",
+        "29357",
+        "40177",
+        "35190"
+      ],
+      [
+        "iPad",
+        "28300",
+        "29292",
+        "31862"
+      ],
+      [
+        "Wearables, Home and Accessories",
+        "39845",
+        "41241",
+        "38367"
+      ],
+      [
+        "Services",
+        "85200",
+        "78129",
+        "68425"
+      ],
+      [
+        "Total net sales",
+        "383285",
+        "394328",
+        "365817"
+      ]
+    ],
+    "qa": {
+      "question": "What percentage of total net sales in 2023 came from iPhone?",
+      "program": "percentage(200583, 383285)",
+      "exe_ans": 52.33
+    },
+    "source": "apple_2023.pdf"
+  },
+  {
+    "id": "num_20",
+    "intent": "Numerical",
+    "pre_text": [
+      "Apple Inc. CONSOLIDATED STATEMENTS OF OPERATIONS (In millions).",
+      "Earnings per share information."
+    ],
+    "post_text": [],
+    "table": [
+      [
+        "",
+        "2023",
+        "2022",
+        "2021"
+      ],
+      [
+        "Net income",
+        "96995",
+        "99803",
+        "94680"
+      ],
+      [
+        "Weighted-average basic shares outstanding (thousands)",
+        "15744231",
+        "16215963",
+        "16701272"
+      ],
+      [
+        "Weighted-average diluted shares (thousands)",
+        "15812547",
+        "16325819",
+        "16864919"
+      ],
+      [
+        "Basic earnings per share",
+        "6.16",
+        "6.15",
+        "5.67"
+      ],
+      [
+        "Diluted earnings per share",
+        "6.13",
+        "6.11",
+        "5.61"
+      ]
+    ],
+    "qa": {
+      "question": "What is the percentage change in diluted earnings per share from 2022 to 2023?",
+      "program": "percentage_change(6.11, 6.13)",
+      "exe_ans": 0.0033
+    },
+    "source": "apple_2023.pdf"
+  },
+  {
+    "id": "num_21",
+    "intent": "Numerical",
+    "pre_text": [
+      "Property, Plant and Equipment information as of September 30, 2023 and September 24, 2022 (in millions)."
+    ],
+    "post_text": [],
+    "table": [
+      [
+        "",
+        "2023",
+        "2022"
+      ],
+      [
+        "Land and buildings",
+        "23446",
+        "22126"
+      ],
+      [
+        "Machinery, equipment and internal-use software",
+        "78314",
+        "81060"
+      ],
+      [
+        "Leasehold improvements",
+        "12839",
+        "11271"
+      ],
+      [
+        "Gross property, plant and equipment",
+        "114599",
+        "114457"
+      ],
+      [
+        "Accumulated depreciation",
+        "70884",
+        "72340"
+      ],
+      [
+        "Total property, plant and equipment, net",
+        "43715",
+        "42117"
+      ]
+    ],
+    "qa": {
+      "question": "What is the difference in accumulated depreciation between 2022 and 2023?",
+      "program": "subtract(72340, 70884)",
+      "exe_ans": 1456.0
+    },
+    "source": "apple_2023.pdf"
+  },
+  {
+    "id": "num_22",
+    "intent": "Numerical",
+    "pre_text": [
+      "Shareholders' equity information for 2023, 2022 and 2021 (in millions)."
+    ],
+    "post_text": [],
+    "table": [
+      [
+        "",
+        "2023",
+        "2022",
+        "2021"
+      ],
+      [
+        "Total shareholders' equity, beginning balances",
+        "50672",
+        "63090",
+        "65339"
+      ],
+      [
+        "Net income",
+        "96995",
+        "99803",
+        "94680"
+      ],
+      [
+        "Dividends and dividend equivalents declared",
+        "14996",
+        "14793",
+        "14431"
+      ],
+      [
+        "Common stock repurchased",
+        "77046",
+        "90186",
+        "85502"
+      ]
+    ],
+    "qa": {
+      "question": "What is the sum of dividends declared and common stock repurchased in 2023?",
+      "program": "add(14996, 77046)",
+      "exe_ans": 92042.0
+    },
+    "source": "apple_2023.pdf"
+  },
+  {
+    "id": "num_23",
+    "intent": "Numerical",
+    "pre_text": [
+      "Income tax provision information for 2023, 2022 and 2021 (in millions)."
+    ],
+    "post_text": [],
+    "table": [
+      [
+        "",
+        "2023",
+        "2022",
+        "2021"
+      ],
+      [
+        "Federal current",
+        "9445",
+        "7890",
+        "8257"
+      ],
+      [
+        "Federal deferred",
+        "-3644",
+        "-2265",
+        "-7176"
+      ],
+      [
+        "Federal total",
+        "5801",
+        "5625",
+        "1081"
+      ],
+      [
+        "State total",
+        "1521",
+        "1603",
+        "1282"
+      ],
+      [
+        "Foreign current",
+        "8750",
+        "8996",
+        "9424"
+      ],
+      [
+        "Foreign deferred",
+        "669",
+        "3076",
+        "2740"
+      ],
+      [
+        "Foreign total",
+        "9419",
+        "12072",
+        "12164"
+      ],
+      [
+        "Total provision for income taxes",
+        "16741",
+        "19300",
+        "14527"
+      ]
+    ],
+    "qa": {
+      "question": "What is the ratio of federal total to foreign total income tax provision in 2023?",
+      "program": "divide(5801, 9419)",
+      "exe_ans": 0.6159
+    },
+    "source": "apple_2023.pdf"
+  },
+  {
+    "id": "num_24",
+    "intent": "Numerical",
+    "pre_text": [
+      "Shares of Common Stock changes for 2023, 2022 and 2021 (in thousands)."
+    ],
+    "post_text": [],
+    "table": [
+      [
+        "",
+        "2023",
+        "2022",
+        "2021"
+      ],
+      [
+        "Common stock outstanding, beginning balances",
+        "15943425",
+        "16426786",
+        "16976763"
+      ],
+      [
+        "Common stock repurchased",
+        "-471419",
+        "-568589",
+        "-656340"
+      ],
+      [
+        "Common stock issued, net",
+        "78055",
+        "85228",
+        "106363"
+      ],
+      [
+        "Common stock outstanding, ending balances",
+        "15550061",
+        "15943425",
+        "16426786"
+      ]
+    ],
+    "qa": {
+      "question": "What is the percentage change in common stock repurchased from 2022 to 2023?",
+      "program": "percentage_change(568589, 471419)",
+      "exe_ans": -0.1708
+    },
+    "source": "apple_2023.pdf"
+  },
+  {
+    "id": "num_25",
+    "intent": "Numerical",
+    "pre_text": [
+      "The fair value of non-current marketable debt securities by contractual maturity as of September 30, 2023 (in millions)."
+    ],
+    "post_text": [],
+    "table": [
+      [
+        "Maturity",
+        "Fair Value"
+      ],
+      [
+        "Due after 1 year through 5 years",
+        "74427"
+      ],
+      [
+        "Due after 5 years through 10 years",
+        "9964"
+      ],
+      [
+        "Due after 10 years",
+        "16153"
+      ],
+      [
+        "Total fair value",
+        "100544"
+      ]
+    ],
+    "qa": {
+      "question": "What percentage of total non-current marketable debt securities is due after 10 years?",
+      "program": "percentage(16153, 100544)",
+      "exe_ans": 16.07
+    },
+    "source": "apple_2023.pdf"
+  },
+  {
+    "id": "lkp_01",
+    "intent": "Lookup",
+    "pre_text": [
+      "The Company's common stock is traded on The Nasdaq Stock Market LLC under the symbol AAPL.",
+      "As of October 20, 2023, there were 23,763 shareholders of record."
+    ],
+    "post_text": [],
+    "table": [],
+    "qa": {
+      "question": "How many shareholders of record did Apple have as of October 20, 2023?",
+      "program": "neural",
+      "exe_ans": "23,763"
+    },
+    "source": "apple_2023.pdf"
+  },
+  {
+    "id": "lkp_02",
+    "intent": "Lookup",
+    "pre_text": [
+      "The Company's common stock is traded on The Nasdaq Stock Market LLC under the symbol AAPL."
+    ],
+    "post_text": [],
+    "table": [],
+    "qa": {
+      "question": "On which stock exchange is Apple's common stock traded?",
+      "program": "neural",
+      "exe_ans": "The Nasdaq Stock Market LLC"
+    },
+    "source": "apple_2023.pdf"
+  },
+  {
+    "id": "lkp_03",
+    "intent": "Lookup",
+    "pre_text": [
+      "Apple Inc. Form 10-K For the Fiscal Year Ended September 30, 2023."
+    ],
+    "post_text": [],
+    "table": [],
+    "qa": {
+      "question": "What is the fiscal year end date for Apple's 2023 Form 10-K?",
+      "program": "neural",
+      "exe_ans": "September 30, 2023"
+    },
+    "source": "apple_2023.pdf"
+  },
+  {
+    "id": "lkp_04",
+    "intent": "Lookup",
+    "pre_text": [
+      "The Company's headquarters is located in Cupertino, California.",
+      "As of September 30, 2023, the Company owned or leased facilities and land for corporate functions, R&D, data centers, retail and other purposes."
+    ],
+    "post_text": [],
+    "table": [],
+    "qa": {
+      "question": "Where is Apple's headquarters located?",
+      "program": "neural",
+      "exe_ans": "Cupertino, California"
+    },
+    "source": "apple_2023.pdf"
+  },
+  {
+    "id": "lkp_05",
+    "intent": "Lookup",
+    "pre_text": [
+      "As of September 30, 2023, the Company's quarterly cash dividend was $0.24 per share.",
+      "The Company intends to increase its dividend on an annual basis, subject to declaration by the Board of Directors."
+    ],
+    "post_text": [],
+    "table": [],
+    "qa": {
+      "question": "What was Apple's quarterly cash dividend per share as of September 30, 2023?",
+      "program": "neural",
+      "exe_ans": "$0.24"
+    },
+    "source": "apple_2023.pdf"
+  },
+  {
+    "id": "lkp_06",
+    "intent": "Lookup",
+    "pre_text": [
+      "The weighted-average remaining lease term related to the Company's lease liabilities as of September 30, 2023 and September 24, 2022 was 10.6 years and 10.1 years, respectively.",
+      "The discount rate related to the Company's lease liabilities as of September 30, 2023 and September 24, 2022 was 3.0% and 2.3%, respectively."
+    ],
+    "post_text": [],
+    "table": [],
+    "qa": {
+      "question": "What was the weighted-average remaining lease term as of September 30, 2023?",
+      "program": "neural",
+      "exe_ans": "10.6 years"
+    },
+    "source": "apple_2023.pdf"
+  },
+  {
+    "id": "lkp_07",
+    "intent": "Lookup",
+    "pre_text": [
+      "The weighted-average remaining lease term related to the Company's lease liabilities as of September 30, 2023 and September 24, 2022 was 10.6 years and 10.1 years, respectively.",
+      "The discount rate related to the Company's lease liabilities as of September 30, 2023 and September 24, 2022 was 3.0% and 2.3%, respectively."
+    ],
+    "post_text": [],
+    "table": [],
+    "qa": {
+      "question": "What was the discount rate related to Apple's lease liabilities as of September 30, 2023?",
+      "program": "neural",
+      "exe_ans": "3.0%"
+    },
+    "source": "apple_2023.pdf"
+  },
+  {
+    "id": "lkp_08",
+    "intent": "Lookup",
+    "pre_text": [
+      "The Company's effective tax rate for 2023 and 2022 was lower than the statutory federal income tax rate due primarily to a lower effective tax rate on foreign earnings, the impact of the U.S. federal R&D credit, and tax benefits from share-based compensation."
+    ],
+    "post_text": [],
+    "table": [
+      [
+        "",
+        "2023",
+        "2022",
+        "2021"
+      ],
+      [
+        "Provision for income taxes",
+        "16741",
+        "19300",
+        "14527"
+      ],
+      [
+        "Effective tax rate",
+        "14.7%",
+        "16.2%",
+        "13.3%"
+      ],
+      [
+        "Statutory federal income tax rate",
+        "21%",
+        "21%",
+        "21%"
+      ]
+    ],
+    "qa": {
+      "question": "What was Apple's effective tax rate in 2023?",
+      "program": "neural",
+      "exe_ans": "14.7%"
+    },
+    "source": "apple_2023.pdf"
+  },
+  {
+    "id": "lkp_09",
+    "intent": "Lookup",
+    "pre_text": [
+      "On August 30, 2016, the European Commission announced its decision that Ireland granted state aid to the Company by providing tax opinions in 1991 and 2007.",
+      "The recovery amount was calculated to be €13.1 billion, plus interest of €1.2 billion."
+    ],
+    "post_text": [],
+    "table": [],
+    "qa": {
+      "question": "What was the recovery amount calculated in the European Commission State Aid Decision?",
+      "program": "neural",
+      "exe_ans": "€13.1 billion"
+    },
+    "source": "apple_2023.pdf"
+  },
+  {
+    "id": "lkp_10",
+    "intent": "Lookup",
+    "pre_text": [
+      "On August 30, 2016, the European Commission announced its decision that Ireland granted state aid to the Company."
+    ],
+    "post_text": [],
+    "table": [],
+    "qa": {
+      "question": "When did the European Commission announce its State Aid Decision regarding Apple?",
+      "program": "neural",
+      "exe_ans": "August 30, 2016"
+    },
+    "source": "apple_2023.pdf"
+  },
+  {
+    "id": "lkp_11",
+    "intent": "Lookup",
+    "pre_text": [
+      "Net sales disaggregated by significant products and services for 2023, 2022 and 2021 were as follows (in millions)."
+    ],
+    "post_text": [],
+    "table": [
+      [
+        "",
+        "2023",
+        "2022",
+        "2021"
+      ],
+      [
+        "iPhone",
+        "200583",
+        "205489",
+        "191973"
+      ],
+      [
+        "Mac",
+        "29357",
+        "40177",
+        "35190"
+      ],
+      [
+        "iPad",
+        "28300",
+        "29292",
+        "31862"
+      ],
+      [
+        "Wearables, Home and Accessories",
+        "39845",
+        "41241",
+        "38367"
+      ],
+      [
+        "Services",
+        "85200",
+        "78129",
+        "68425"
+      ],
+      [
+        "Total net sales",
+        "383285",
+        "394328",
+        "365817"
+      ]
+    ],
+    "qa": {
+      "question": "Did Services net sales increase or decrease from 2022 to 2023?",
+      "program": "neural",
+      "exe_ans": "increase"
+    },
+    "source": "apple_2023.pdf"
+  },
+  {
+    "id": "lkp_12",
+    "intent": "Lookup",
+    "pre_text": [
+      "Net sales disaggregated by significant products and services for 2023, 2022 and 2021 were as follows (in millions)."
+    ],
+    "post_text": [],
+    "table": [
+      [
+        "",
+        "2023",
+        "2022",
+        "2021"
+      ],
+      [
+        "iPhone",
+        "200583",
+        "205489",
+        "191973"
+      ],
+      [
+        "Mac",
+        "29357",
+        "40177",
+        "35190"
+      ],
+      [
+        "iPad",
+        "28300",
+        "29292",
+        "31862"
+      ],
+      [
+        "Wearables, Home and Accessories",
+        "39845",
+        "41241",
+        "38367"
+      ],
+      [
+        "Services",
+        "85200",
+        "78129",
+        "68425"
+      ],
+      [
+        "Total net sales",
+        "383285",
+        "394328",
+        "365817"
+      ]
+    ],
+    "qa": {
+      "question": "Which product category had the highest net sales in 2023?",
+      "program": "neural",
+      "exe_ans": "iPhone"
+    },
+    "source": "apple_2023.pdf"
+  },
+  {
+    "id": "lkp_13",
+    "intent": "Lookup",
+    "pre_text": [
+      "The following table shows net sales by reportable segment for 2023, 2022 and 2021 (dollars in millions)."
+    ],
+    "post_text": [],
+    "table": [
+      [
+        "",
+        "2023",
+        "2022",
+        "2021"
+      ],
+      [
+        "Americas",
+        "162560",
+        "169658",
+        "153306"
+      ],
+      [
+        "Europe",
+        "94294",
+        "95118",
+        "89307"
+      ],
+      [
+        "Greater China",
+        "72559",
+        "74200",
+        "68366"
+      ],
+      [
+        "Japan",
+        "24257",
+        "25977",
+        "28482"
+      ],
+      [
+        "Rest of Asia Pacific",
+        "29615",
+        "29375",
+        "26356"
+      ],
+      [
+        "Total net sales",
+        "383285",
+        "394328",
+        "365817"
+      ]
+    ],
+    "qa": {
+      "question": "Which geographic segment had the lowest net sales in 2023?",
+      "program": "neural",
+      "exe_ans": "Japan"
+    },
+    "source": "apple_2023.pdf"
+  },
+  {
+    "id": "lkp_14",
+    "intent": "Lookup",
+    "pre_text": [
+      "The Company's products and services include iPhone, Mac, iPad, Wearables, Home and Accessories, and Services.",
+      "Products net sales include amortization of the deferred value of unspecified software upgrade rights.",
+      "Services net sales include amortization of the deferred value of content provided by certain Services arrangements."
+    ],
+    "post_text": [],
+    "table": [],
+    "qa": {
+      "question": "What is included in Products net sales according to Apple's disclosure?",
+      "program": "neural",
+      "exe_ans": "amortization of the deferred value of unspecified software upgrade rights"
+    },
+    "source": "apple_2023.pdf"
+  },
+  {
+    "id": "lkp_15",
+    "intent": "Lookup",
+    "pre_text": [
+      "Products and Services gross margin percentage for 2023, 2022 and 2021."
+    ],
+    "post_text": [],
+    "table": [
+      [
+        "",
+        "2023",
+        "2022",
+        "2021"
+      ],
+      [
+        "Products gross margin percentage",
+        "36.5%",
+        "36.3%",
+        "35.3%"
+      ],
+      [
+        "Services gross margin percentage",
+        "70.8%",
+        "71.7%",
+        "69.7%"
+      ],
+      [
+        "Total gross margin percentage",
+        "44.1%",
+        "43.3%",
+        "41.8%"
+      ]
+    ],
+    "qa": {
+      "question": "What was the Services gross margin percentage in 2023?",
+      "program": "neural",
+      "exe_ans": "70.8%"
+    },
+    "source": "apple_2023.pdf"
+  },
+  {
+    "id": "lkp_16",
+    "intent": "Lookup",
+    "pre_text": [
+      "The Company has outstanding Notes, which are senior unsecured obligations with interest payable in arrears."
+    ],
+    "post_text": [],
+    "table": [
+      [
+        "",
+        "2023",
+        "2022"
+      ],
+      [
+        "Total term debt principal",
+        "106572",
+        "111824"
+      ],
+      [
+        "Total term debt",
+        "105103",
+        "110087"
+      ],
+      [
+        "Current portion of term debt",
+        "9822",
+        "11128"
+      ],
+      [
+        "Total non-current portion of term debt",
+        "95281",
+        "98959"
+      ]
+    ],
+    "qa": {
+      "question": "Are Apple's outstanding Notes senior secured or senior unsecured obligations?",
+      "program": "neural",
+      "exe_ans": "senior unsecured"
+    },
+    "source": "apple_2023.pdf"
+  },
+  {
+    "id": "lkp_17",
+    "intent": "Lookup",
+    "pre_text": [
+      "The Company recognizes revenue at the amount to which it expects to be entitled when control of the products or services is transferred to its customers.",
+      "For most of the Company's Products net sales, control transfers when products are shipped.",
+      "For the Company's Services net sales, control transfers over time as services are delivered."
+    ],
+    "post_text": [],
+    "table": [],
+    "qa": {
+      "question": "When does Apple recognize revenue for Products net sales?",
+      "program": "neural",
+      "exe_ans": "when products are shipped"
+    },
+    "source": "apple_2023.pdf"
+  },
+  {
+    "id": "lkp_18",
+    "intent": "Lookup",
+    "pre_text": [
+      "The Company is exposed to economic risk from interest rates and foreign exchange rates.",
+      "The Company uses various strategies to manage these risks; however, they may still impact the Company's consolidated financial statements."
+    ],
+    "post_text": [],
+    "table": [],
+    "qa": {
+      "question": "What two types of economic risk is Apple exposed to according to its market risk disclosures?",
+      "program": "neural",
+      "exe_ans": "interest rates and foreign exchange rates"
+    },
+    "source": "apple_2023.pdf"
+  },
+  {
+    "id": "lkp_19",
+    "intent": "Lookup",
+    "pre_text": [
+      "The consolidated financial statements include the accounts of Apple Inc. and its wholly owned subsidiaries.",
+      "The Company's fiscal year is the 52- or 53-week period that ends on the last Saturday of September."
+    ],
+    "post_text": [],
+    "table": [],
+    "qa": {
+      "question": "How is Apple's fiscal year defined?",
+      "program": "neural",
+      "exe_ans": "the 52- or 53-week period that ends on the last Saturday of September"
+    },
+    "source": "apple_2023.pdf"
+  },
+  {
+    "id": "lkp_20",
+    "intent": "Lookup",
+    "pre_text": [
+      "Apple Inc. CONSOLIDATED STATEMENTS OF OPERATIONS (In millions)."
+    ],
+    "post_text": [],
+    "table": [
+      [
+        "",
+        "2023",
+        "2022",
+        "2021"
+      ],
+      [
+        "Research and development",
+        "29915",
+        "26251",
+        "21914"
+      ],
+      [
+        "Selling, general and administrative",
+        "24932",
+        "25094",
+        "21973"
+      ],
+      [
+        "Total operating expenses",
+        "54847",
+        "51345",
+        "43887"
+      ]
+    ],
+    "qa": {
+      "question": "Did selling, general and administrative expenses increase or decrease from 2022 to 2023?",
+      "program": "neural",
+      "exe_ans": "decrease"
+    },
+    "source": "apple_2023.pdf"
+  },
+  {
+    "id": "lkp_21",
+    "intent": "Lookup",
+    "pre_text": [
+      "Shares of Common Stock changes for 2023, 2022 and 2021 (in thousands)."
+    ],
+    "post_text": [],
+    "table": [
+      [
+        "",
+        "2023",
+        "2022",
+        "2021"
+      ],
+      [
+        "Common stock outstanding, ending balances",
+        "15550061",
+        "15943425",
+        "16426786"
+      ]
+    ],
+    "qa": {
+      "question": "How many shares of common stock were outstanding at the end of fiscal year 2023?",
+      "program": "neural",
+      "exe_ans": "15,550,061 thousand"
+    },
+    "source": "apple_2023.pdf"
+  },
+  {
+    "id": "lkp_22",
+    "intent": "Lookup",
+    "pre_text": [
+      "RSU activity for 2023, 2022 and 2021."
+    ],
+    "post_text": [],
+    "table": [
+      [
+        "",
+        "Number of RSUs",
+        "Weighted-Average Grant Date Fair Value"
+      ],
+      [
+        "Balance as of September 30, 2023",
+        "180247",
+        "$135.91"
+      ],
+      [
+        "Balance as of September 24, 2022",
+        "201501",
+        "$109.48"
+      ]
+    ],
+    "qa": {
+      "question": "What was the weighted-average grant date fair value of RSUs as of September 30, 2023?",
+      "program": "neural",
+      "exe_ans": "$135.91"
+    },
+    "source": "apple_2023.pdf"
+  },
+  {
+    "id": "lkp_23",
+    "intent": "Lookup",
+    "pre_text": [
+      "The Company has invested, and in the future may invest, in new business strategies or acquisitions.",
+      "Such endeavors may involve significant risks and uncertainties, including distraction of management from current operations, greater-than-expected liabilities and expenses."
+    ],
+    "post_text": [],
+    "table": [],
+    "qa": {
+      "question": "What risks does Apple identify regarding new business strategies or acquisitions?",
+      "program": "neural",
+      "exe_ans": "distraction of management from current operations, greater-than-expected liabilities and expenses"
+    },
+    "source": "apple_2023.pdf"
+  },
+  {
+    "id": "lkp_24",
+    "intent": "Lookup",
+    "pre_text": [
+      "The Company distributes its products and certain of its services through third-party cellular network carriers, wholesalers, retailers and resellers.",
+      "The Company also sells its products and services directly to small and mid-sized businesses and education, enterprise and government customers."
+    ],
+    "post_text": [],
+    "table": [],
+    "qa": {
+      "question": "Through what channels does Apple distribute its products?",
+      "program": "neural",
+      "exe_ans": "third-party cellular network carriers, wholesalers, retailers and resellers"
+    },
+    "source": "apple_2023.pdf"
+  },
+  {
+    "id": "lkp_25",
+    "intent": "Lookup",
+    "pre_text": [
+      "The Company expects its quarterly net sales and results of operations to fluctuate.",
+      "The Company's gross margins are subject to volatility and downward pressure due to a variety of factors, including continued industry-wide global product pricing pressures."
+    ],
+    "post_text": [],
+    "table": [],
+    "qa": {
+      "question": "What does Apple say about the volatility of its gross margins?",
+      "program": "neural",
+      "exe_ans": "subject to volatility and downward pressure due to continued industry-wide global product pricing pressures"
+    },
+    "source": "apple_2023.pdf"
+  },
+  {
+    "id": "alph_num_01",
+    "source": "alphabet_2025.pdf",
+    "intent": "Numerical",
+    "qa": {
+      "question": "What is the percentage change in total revenues from 2024 to 2025?",
+      "exe_ans": 0.1509,
+      "program": "percentage_change(350018, 402836)"
+    },
+    "pre_text": [
+      "Year Ended December 31,",
+      "2024 2025"
+    ],
+    "table": [
+      [
+        "",
+        "2024",
+        "2025"
+      ],
+      [
+        "Revenues",
+        "350018",
+        "402836"
+      ]
+    ],
+    "post_text": []
+  },
+  {
+    "id": "alph_num_02",
+    "source": "alphabet_2025.pdf",
+    "intent": "Numerical",
+    "qa": {
+      "question": "What is the difference in net income between 2025 and 2024?",
+      "exe_ans": 32052.0,
+      "program": "subtract(132170, 100118)"
+    },
+    "pre_text": [
+      "Consolidated Statements of Income (in millions)"
+    ],
+    "table": [
+      [
+        "",
+        "2024",
+        "2025"
+      ],
+      [
+        "Net income",
+        "100118",
+        "132170"
+      ]
+    ],
+    "post_text": []
+  },
+  {
+    "id": "alph_num_03",
+    "source": "alphabet_2025.pdf",
+    "intent": "Numerical",
+    "qa": {
+      "question": "What is the sum of Google Cloud revenues for 2024 and 2025?",
+      "exe_ans": 101934.0,
+      "program": "add(43229, 58705)"
+    },
+    "pre_text": [
+      "Disaggregated Revenues (in millions)"
+    ],
+    "table": [
+      [
+        "",
+        "2024",
+        "2025"
+      ],
+      [
+        "Google Cloud",
+        "43229",
+        "58705"
+      ]
+    ],
+    "post_text": []
+  },
+  {
+    "id": "alph_num_04",
+    "source": "alphabet_2025.pdf",
+    "intent": "Numerical",
+    "qa": {
+      "question": "What is the percentage change in Google Cloud revenues from 2024 to 2025?",
+      "exe_ans": 0.3579,
+      "program": "percentage_change(43229, 58705)"
+    },
+    "pre_text": [
+      "Disaggregated Revenues (in millions)"
+    ],
+    "table": [
+      [
+        "",
+        "2024",
+        "2025"
+      ],
+      [
+        "Google Cloud",
+        "43229",
+        "58705"
+      ]
+    ],
+    "post_text": []
+  },
+  {
+    "id": "alph_num_05",
+    "source": "alphabet_2025.pdf",
+    "intent": "Numerical",
+    "qa": {
+      "question": "What is the ratio of operating income to total revenues in 2025?",
+      "exe_ans": 0.3203,
+      "program": "divide(129039, 402836)"
+    },
+    "pre_text": [
+      "Consolidated financial summary (in millions)"
+    ],
+    "table": [
+      [
+        "",
+        "2025"
+      ],
+      [
+        "Consolidated revenues",
+        "402836"
+      ],
+      [
+        "Operating income",
+        "129039"
+      ]
+    ],
+    "post_text": []
+  },
+  {
+    "id": "alph_num_06",
+    "source": "alphabet_2025.pdf",
+    "intent": "Numerical",
+    "qa": {
+      "question": "What is the difference in Research and Development expenses between 2025 and 2024?",
+      "exe_ans": 11761.0,
+      "program": "subtract(61087, 49326)"
+    },
+    "pre_text": [
+      "Operating expenses (in millions)"
+    ],
+    "table": [
+      [
+        "",
+        "2024",
+        "2025"
+      ],
+      [
+        "Research and development expenses",
+        "49326",
+        "61087"
+      ]
+    ],
+    "post_text": []
+  },
+  {
+    "id": "alph_num_07",
+    "source": "alphabet_2025.pdf",
+    "intent": "Numerical",
+    "qa": {
+      "question": "What is the sum of Google Search & other revenues for 2024 and 2025?",
+      "exe_ans": 422616.0,
+      "program": "add(198084, 224532)"
+    },
+    "pre_text": [
+      "Disaggregated Revenues (in millions)"
+    ],
+    "table": [
+      [
+        "",
+        "2024",
+        "2025"
+      ],
+      [
+        "Google Search & other",
+        "198084",
+        "224532"
+      ]
+    ],
+    "post_text": []
+  },
+  {
+    "id": "alph_num_08",
+    "source": "alphabet_2025.pdf",
+    "intent": "Numerical",
+    "qa": {
+      "question": "What percentage of total 2025 revenues came from Google advertising?",
+      "exe_ans": 73.15,
+      "program": "percentage(294691, 402836)"
+    },
+    "pre_text": [
+      "Disaggregated Revenues (in millions)"
+    ],
+    "table": [
+      [
+        "",
+        "2025"
+      ],
+      [
+        "Google advertising",
+        "294691"
+      ],
+      [
+        "Total revenues",
+        "402836"
+      ]
+    ],
+    "post_text": []
+  },
+  {
+    "id": "alph_num_09",
+    "source": "alphabet_2025.pdf",
+    "intent": "Numerical",
+    "qa": {
+      "question": "What is the difference in total assets between 2025 and 2024?",
+      "exe_ans": 145025.0,
+      "program": "subtract(595281, 450256)"
+    },
+    "pre_text": [
+      "Consolidated Balance Sheets (in millions)"
+    ],
+    "table": [
+      [
+        "",
+        "2024",
+        "2025"
+      ],
+      [
+        "Total assets",
+        "450256",
+        "595281"
+      ]
+    ],
+    "post_text": []
+  },
+  {
+    "id": "alph_num_10",
+    "source": "alphabet_2025.pdf",
+    "intent": "Numerical",
+    "qa": {
+      "question": "What is the percentage change in cash and cash equivalents from 2024 to 2025?",
+      "exe_ans": 0.3087,
+      "program": "percentage_change(23466, 30708)"
+    },
+    "pre_text": [
+      "Consolidated Balance Sheets (in millions)"
+    ],
+    "table": [
+      [
+        "",
+        "2024",
+        "2025"
+      ],
+      [
+        "Cash and cash equivalents",
+        "23466",
+        "30708"
+      ]
+    ],
+    "post_text": []
+  },
+  {
+    "id": "alph_num_11",
+    "source": "alphabet_2025.pdf",
+    "intent": "Numerical",
+    "qa": {
+      "question": "What is the ratio of Google Cloud operating income to Google Services operating income in 2025?",
+      "exe_ans": 0.0998,
+      "program": "divide(13910, 139404)"
+    },
+    "pre_text": [
+      "Segment profitability (in millions)"
+    ],
+    "table": [
+      [
+        "",
+        "2025"
+      ],
+      [
+        "Google Services",
+        "139404"
+      ],
+      [
+        "Google Cloud",
+        "13910"
+      ]
+    ],
+    "post_text": []
+  },
+  {
+    "id": "alph_num_12",
+    "source": "alphabet_2025.pdf",
+    "intent": "Numerical",
+    "qa": {
+      "question": "What is the difference in provision for income taxes between 2025 and 2024?",
+      "exe_ans": 6959.0,
+      "program": "subtract(26656, 19697)"
+    },
+    "pre_text": [
+      "Provision for Income Taxes (in millions)"
+    ],
+    "table": [
+      [
+        "",
+        "2024",
+        "2025"
+      ],
+      [
+        "Provision for income taxes",
+        "19697",
+        "26656"
+      ]
+    ],
+    "post_text": []
+  },
+  {
+    "id": "alph_num_13",
+    "source": "alphabet_2025.pdf",
+    "intent": "Numerical",
+    "qa": {
+      "question": "What is the sum of operating cash flow and net income for 2025?",
+      "exe_ans": 296883.0,
+      "program": "add(164713, 132170)"
+    },
+    "pre_text": [
+      "Cash flow summary (in millions)"
+    ],
+    "table": [
+      [
+        "",
+        "2025"
+      ],
+      [
+        "Net cash provided by operating activities",
+        "164713"
+      ],
+      [
+        "Net income",
+        "132170"
+      ]
+    ],
+    "post_text": []
+  },
+  {
+    "id": "alph_num_14",
+    "source": "alphabet_2025.pdf",
+    "intent": "Numerical",
+    "qa": {
+      "question": "What is the percentage change in diluted net income per share from 2024 to 2025?",
+      "exe_ans": 0.3446,
+      "program": "percentage_change(8.04, 10.81)"
+    },
+    "pre_text": [
+      "Consolidated Statements of Income (per share amounts)"
+    ],
+    "table": [
+      [
+        "",
+        "2024",
+        "2025"
+      ],
+      [
+        "Diluted net income per share",
+        "8.04",
+        "10.81"
+      ]
+    ],
+    "post_text": []
+  },
+  {
+    "id": "alph_num_15",
+    "source": "alphabet_2025.pdf",
+    "intent": "Numerical",
+    "qa": {
+      "question": "What is the difference in YouTube ads revenues between 2025 and 2024?",
+      "exe_ans": 4220.0,
+      "program": "subtract(40367, 36147)"
+    },
+    "pre_text": [
+      "Disaggregated Revenues (in millions)"
+    ],
+    "table": [
+      [
+        "",
+        "2024",
+        "2025"
+      ],
+      [
+        "YouTube ads",
+        "36147",
+        "40367"
+      ]
+    ],
+    "post_text": []
+  },
+  {
+    "id": "alph_num_16",
+    "source": "alphabet_2025.pdf",
+    "intent": "Numerical",
+    "qa": {
+      "question": "What is the percentage change in net cash provided by operating activities from 2024 to 2025?",
+      "exe_ans": 0.3146,
+      "program": "percentage_change(125299, 164713)"
+    },
+    "pre_text": [
+      "Cash flow summary (in millions)"
+    ],
+    "table": [
+      [
+        "",
+        "2024",
+        "2025"
+      ],
+      [
+        "Net cash provided by operating activities",
+        "125299",
+        "164713"
+      ]
+    ],
+    "post_text": []
+  },
+  {
+    "id": "alph_num_17",
+    "source": "alphabet_2025.pdf",
+    "intent": "Numerical",
+    "qa": {
+      "question": "What is the ratio of total cost of revenues to total revenues in 2025?",
+      "exe_ans": 0.4033,
+      "program": "divide(162535, 402836)"
+    },
+    "pre_text": [
+      "Income statement (in millions)"
+    ],
+    "table": [
+      [
+        "",
+        "2025"
+      ],
+      [
+        "Cost of revenues",
+        "162535"
+      ],
+      [
+        "Total revenues",
+        "402836"
+      ]
+    ],
+    "post_text": []
+  },
+  {
+    "id": "alph_num_18",
+    "source": "alphabet_2025.pdf",
+    "intent": "Numerical",
+    "qa": {
+      "question": "What is the percentage change in property and equipment net from 2024 to 2025?",
+      "exe_ans": 0.4417,
+      "program": "percentage_change(171036, 246597)"
+    },
+    "pre_text": [
+      "Consolidated Balance Sheets (in millions)"
+    ],
+    "table": [
+      [
+        "",
+        "2024",
+        "2025"
+      ],
+      [
+        "Property and equipment, net",
+        "171036",
+        "246597"
+      ]
+    ],
+    "post_text": []
+  },
+  {
+    "id": "alph_num_19",
+    "source": "alphabet_2025.pdf",
+    "intent": "Numerical",
+    "qa": {
+      "question": "What is the sum of total operating lease liabilities and total finance lease liabilities as of December 31, 2025?",
+      "exe_ans": 18454.0,
+      "program": "add(15954, 2500)"
+    },
+    "pre_text": [
+      "Lease data as of December 31, 2025 (in millions)"
+    ],
+    "table": [
+      [
+        "",
+        "2025"
+      ],
+      [
+        "Total operating lease liabilities",
+        "15954"
+      ],
+      [
+        "Total finance lease liabilities",
+        "2500"
+      ]
+    ],
+    "post_text": []
+  },
+  {
+    "id": "alph_num_20",
+    "source": "alphabet_2025.pdf",
+    "intent": "Numerical",
+    "qa": {
+      "question": "What is the difference in total goodwill between 2025 and 2024?",
+      "exe_ans": 1495.0,
+      "program": "subtract(33380, 31885)"
+    },
+    "pre_text": [
+      "Goodwill by segment (in millions)"
+    ],
+    "table": [
+      [
+        "",
+        "2024",
+        "2025"
+      ],
+      [
+        "Total goodwill",
+        "31885",
+        "33380"
+      ]
+    ],
+    "post_text": []
+  },
+  {
+    "id": "alph_num_21",
+    "source": "alphabet_2025.pdf",
+    "intent": "Numerical",
+    "qa": {
+      "question": "What is the difference in Other Bets operating loss between 2025 and 2024?",
+      "exe_ans": 3071.0,
+      "program": "subtract(7515, 4444)"
+    },
+    "pre_text": [
+      "Segment profitability (in millions): Other Bets had an operating loss of $4,444 in 2024 and $7,515 in 2025."
+    ],
+    "table": [
+      [
+        "",
+        "2024",
+        "2025"
+      ],
+      [
+        "Other Bets operating loss",
+        "4444",
+        "7515"
+      ]
+    ],
+    "post_text": []
+  },
+  {
+    "id": "alph_num_22",
+    "source": "alphabet_2025.pdf",
+    "intent": "Numerical",
+    "qa": {
+      "question": "What percentage of total 2025 revenues came from Google Cloud?",
+      "exe_ans": 14.57,
+      "program": "percentage(58705, 402836)"
+    },
+    "pre_text": [
+      "Disaggregated Revenues (in millions)"
+    ],
+    "table": [
+      [
+        "",
+        "2025"
+      ],
+      [
+        "Google Cloud",
+        "58705"
+      ],
+      [
+        "Total revenues",
+        "402836"
+      ]
+    ],
+    "post_text": []
+  },
+  {
+    "id": "alph_num_23",
+    "source": "alphabet_2025.pdf",
+    "intent": "Numerical",
+    "qa": {
+      "question": "What is the difference in general and administrative expenses between 2025 and 2024?",
+      "exe_ans": 7294.0,
+      "program": "subtract(21482, 14188)"
+    },
+    "pre_text": [
+      "Operating expenses (in millions)"
+    ],
+    "table": [
+      [
+        "",
+        "2024",
+        "2025"
+      ],
+      [
+        "General and administrative expenses",
+        "14188",
+        "21482"
+      ]
+    ],
+    "post_text": []
+  },
+  {
+    "id": "alph_num_24",
+    "source": "alphabet_2025.pdf",
+    "intent": "Numerical",
+    "qa": {
+      "question": "What is the ratio of total long-term debt to total assets as of December 31, 2025?",
+      "exe_ans": 0.0782,
+      "program": "divide(46547, 595281)"
+    },
+    "pre_text": [
+      "Balance sheet data (in millions)"
+    ],
+    "table": [
+      [
+        "",
+        "2025"
+      ],
+      [
+        "Total long-term debt",
+        "46547"
+      ],
+      [
+        "Total assets",
+        "595281"
+      ]
+    ],
+    "post_text": []
+  },
+  {
+    "id": "alph_num_25",
+    "source": "alphabet_2025.pdf",
+    "intent": "Numerical",
+    "qa": {
+      "question": "What is the percentage change in depreciation of property and equipment from 2024 to 2025?",
+      "exe_ans": 0.3804,
+      "program": "percentage_change(15311, 21136)"
+    },
+    "pre_text": [
+      "Consolidated Statements of Cash Flows (in millions)"
+    ],
+    "table": [
+      [
+        "",
+        "2024",
+        "2025"
+      ],
+      [
+        "Depreciation of property and equipment",
+        "15311",
+        "21136"
+      ]
+    ],
+    "post_text": []
+  },
+  {
+    "id": "alph_lkp_01",
+    "source": "alphabet_2025.pdf",
+    "intent": "Lookup",
+    "qa": {
+      "question": "What year did Alphabet's fiscal year end in the 2025 10-K?",
+      "exe_ans": "2025",
+      "program": "neural"
+    },
+    "pre_text": [
+      "For the fiscal year ended December 31, 2025"
+    ],
+    "table": [],
+    "post_text": []
+  },
+  {
+    "id": "alph_lkp_02",
+    "source": "alphabet_2025.pdf",
+    "intent": "Lookup",
+    "qa": {
+      "question": "Under what ticker symbols is Alphabet's stock listed on Nasdaq?",
+      "exe_ans": "GOOG and GOOGL",
+      "program": "neural"
+    },
+    "pre_text": [
+      "Our Class A stock has been listed on the Nasdaq Global Select Market under the symbol GOOG since August 19, 2004, and under the symbol GOOGL since April 3, 2014."
+    ],
+    "table": [],
+    "post_text": []
+  },
+  {
+    "id": "alph_lkp_03",
+    "source": "alphabet_2025.pdf",
+    "intent": "Lookup",
+    "qa": {
+      "question": "What are Alphabet's three reportable segments?",
+      "exe_ans": "Google Services, Google Cloud, and Other Bets",
+      "program": "neural"
+    },
+    "pre_text": [
+      "We report our segment results as Google Services, Google Cloud, and Other Bets."
+    ],
+    "table": [],
+    "post_text": []
+  },
+  {
+    "id": "alph_lkp_04",
+    "source": "alphabet_2025.pdf",
+    "intent": "Lookup",
+    "qa": {
+      "question": "What was Alphabet's effective tax rate in 2025?",
+      "exe_ans": "16.8%",
+      "program": "neural"
+    },
+    "pre_text": [
+      "Provision for Income Taxes"
+    ],
+    "table": [
+      [
+        "",
+        "2025"
+      ],
+      [
+        "Effective tax rate",
+        "16.8%"
+      ]
+    ],
+    "post_text": []
+  },
+  {
+    "id": "alph_lkp_05",
+    "source": "alphabet_2025.pdf",
+    "intent": "Lookup",
+    "qa": {
+      "question": "What was the weighted-average remaining lease term for operating leases as of December 31, 2025?",
+      "exe_ans": "7.6 years",
+      "program": "neural"
+    },
+    "pre_text": [
+      "Weighted-average remaining lease term as of December 31, 2025: Operating leases 7.6 years"
+    ],
+    "table": [],
+    "post_text": []
+  },
+  {
+    "id": "alph_lkp_06",
+    "source": "alphabet_2025.pdf",
+    "intent": "Lookup",
+    "qa": {
+      "question": "Which segment had the highest operating income in 2025?",
+      "exe_ans": "Google Services",
+      "program": "neural"
+    },
+    "pre_text": [
+      "Segment profitability: Google Services $139,404, Google Cloud $13,910, Other Bets $(7,515)"
+    ],
+    "table": [],
+    "post_text": []
+  },
+  {
+    "id": "alph_lkp_07",
+    "source": "alphabet_2025.pdf",
+    "intent": "Lookup",
+    "qa": {
+      "question": "What is the total face value of long-term debt as of December 31, 2025?",
+      "exe_ans": "$49,085 million",
+      "program": "neural"
+    },
+    "pre_text": [
+      "Total face value of long-term debt 12,000 49,085"
+    ],
+    "table": [
+      [
+        "",
+        "2024",
+        "2025"
+      ],
+      [
+        "Total face value of long-term debt",
+        "12000",
+        "49085"
+      ]
+    ],
+    "post_text": []
+  },
+  {
+    "id": "alph_lkp_08",
+    "source": "alphabet_2025.pdf",
+    "intent": "Lookup",
+    "qa": {
+      "question": "What is the nature of Alphabet's outstanding notes (secured or unsecured)?",
+      "exe_ans": "unsecured",
+      "program": "neural"
+    },
+    "pre_text": [
+      "The notes in the table above are senior unsecured obligations and rank equally with each other."
+    ],
+    "table": [],
+    "post_text": []
+  },
+  {
+    "id": "alph_lkp_09",
+    "source": "alphabet_2025.pdf",
+    "intent": "Lookup",
+    "qa": {
+      "question": "How much did Alphabet enter into definitive agreements to acquire Wiz for?",
+      "exe_ans": "$32.0 billion",
+      "program": "neural"
+    },
+    "pre_text": [
+      "In 2025, we entered into definitive agreements to acquire Wiz, a leading cloud security platform, for $32.0 billion"
+    ],
+    "table": [],
+    "post_text": []
+  },
+  {
+    "id": "alph_lkp_10",
+    "source": "alphabet_2025.pdf",
+    "intent": "Lookup",
+    "qa": {
+      "question": "What was the weighted-average discount rate for finance leases as of December 31, 2025?",
+      "exe_ans": "3.1%",
+      "program": "neural"
+    },
+    "pre_text": [
+      "Weighted-average discount rate: Finance leases 2.8% 3.1%"
+    ],
+    "table": [
+      [
+        "",
+        "2024",
+        "2025"
+      ],
+      [
+        "Finance leases discount rate",
+        "2.8%",
+        "3.1%"
+      ]
+    ],
+    "post_text": []
+  },
+  {
+    "id": "alph_lkp_11",
+    "source": "alphabet_2025.pdf",
+    "intent": "Lookup",
+    "qa": {
+      "question": "Did YouTube ads revenues increase or decrease from 2024 to 2025?",
+      "exe_ans": "increase",
+      "program": "neural"
+    },
+    "pre_text": [
+      "YouTube ads revenues increased $4.2 billion from 2024 to 2025."
+    ],
+    "table": [],
+    "post_text": []
+  },
+  {
+    "id": "alph_lkp_12",
+    "source": "alphabet_2025.pdf",
+    "intent": "Lookup",
+    "qa": {
+      "question": "What was the primary driver of YouTube ads revenue growth in 2025?",
+      "exe_ans": "direct response advertising products",
+      "program": "neural"
+    },
+    "pre_text": [
+      "The growth was driven by our direct response advertising products followed by our brand advertising products, both of which benefited from increased spending by our advertisers."
+    ],
+    "table": [],
+    "post_text": []
+  },
+  {
+    "id": "alph_lkp_13",
+    "source": "alphabet_2025.pdf",
+    "intent": "Lookup",
+    "qa": {
+      "question": "Did Other Bets revenues increase or decrease from 2024 to 2025?",
+      "exe_ans": "decrease",
+      "program": "neural"
+    },
+    "pre_text": [
+      "Other Bets revenues: 2024=$1,648 million, 2025=$1,537 million"
+    ],
+    "table": [
+      [
+        "",
+        "2024",
+        "2025"
+      ],
+      [
+        "Other Bets",
+        "1648",
+        "1537"
+      ]
+    ],
+    "post_text": []
+  },
+  {
+    "id": "alph_lkp_14",
+    "source": "alphabet_2025.pdf",
+    "intent": "Lookup",
+    "qa": {
+      "question": "Where was Google originally incorporated?",
+      "exe_ans": "California",
+      "program": "neural"
+    },
+    "pre_text": [
+      "Google was incorporated in California in September 1998 and re-incorporated in the State of Delaware in August 2003."
+    ],
+    "table": [],
+    "post_text": []
+  },
+  {
+    "id": "alph_lkp_15",
+    "source": "alphabet_2025.pdf",
+    "intent": "Lookup",
+    "qa": {
+      "question": "What was the total cost of revenues as a percentage of revenues in 2025?",
+      "exe_ans": "40%",
+      "program": "neural"
+    },
+    "pre_text": [
+      "Total cost of revenues as a percentage of revenues 42% 40%"
+    ],
+    "table": [
+      [
+        "",
+        "2024",
+        "2025"
+      ],
+      [
+        "Total cost of revenues as a percentage of revenues",
+        "42%",
+        "40%"
+      ]
+    ],
+    "post_text": []
+  },
+  {
+    "id": "alph_lkp_16",
+    "source": "alphabet_2025.pdf",
+    "intent": "Lookup",
+    "qa": {
+      "question": "What two types of derivative instruments does Alphabet use to hedge foreign exchange risk?",
+      "exe_ans": "forwards and options",
+      "program": "neural"
+    },
+    "pre_text": [
+      "We monitor our foreign currency exposures and hedge foreign exchange risks with derivative and non-derivative instruments, including forwards, options (including collars), cross-currency swaps, and foreign currency-denominated debt."
+    ],
+    "table": [],
+    "post_text": []
+  },
+  {
+    "id": "alph_lkp_17",
+    "source": "alphabet_2025.pdf",
+    "intent": "Lookup",
+    "qa": {
+      "question": "What was Alphabet's operating margin in 2025?",
+      "exe_ans": "32%",
+      "program": "neural"
+    },
+    "pre_text": [
+      "Operating margin 32% 32% 0%"
+    ],
+    "table": [
+      [
+        "",
+        "2024",
+        "2025"
+      ],
+      [
+        "Operating margin",
+        "32%",
+        "32%"
+      ]
+    ],
+    "post_text": []
+  },
+  {
+    "id": "alph_lkp_18",
+    "source": "alphabet_2025.pdf",
+    "intent": "Lookup",
+    "qa": {
+      "question": "What was the total purchase commitments and other contractual obligations as of December 31, 2025?",
+      "exe_ans": "$149.1 billion",
+      "program": "neural"
+    },
+    "pre_text": [
+      "As of December 31, 2025, the total for these commitments was $149.1 billion, of which $113.0 billion was short-term, mostly related to technical infrastructure."
+    ],
+    "table": [],
+    "post_text": []
+  },
+  {
+    "id": "alph_lkp_19",
+    "source": "alphabet_2025.pdf",
+    "intent": "Lookup",
+    "qa": {
+      "question": "Which court ruled against Google in the US antitrust lawsuit concerning Search and Search advertising?",
+      "exe_ans": "the US District Court for the District of Columbia",
+      "program": "neural"
+    },
+    "pre_text": [
+      "In August 2024, the US District Court for the District of Columbia ruled against Google, and in December 2025, entered a final judgment requiring remedies."
+    ],
+    "table": [],
+    "post_text": []
+  },
+  {
+    "id": "alph_lkp_20",
+    "source": "alphabet_2025.pdf",
+    "intent": "Lookup",
+    "qa": {
+      "question": "What was Alphabet's interest income in 2025?",
+      "exe_ans": "$4,337 million",
+      "program": "neural"
+    },
+    "pre_text": [
+      "Components of OI&E (in millions): Interest income 2023=$3,865, 2024=$4,482, 2025=$4,337"
+    ],
+    "table": [
+      [
+        "",
+        "2023",
+        "2024",
+        "2025"
+      ],
+      [
+        "Interest income",
+        "3865",
+        "4482",
+        "4337"
+      ]
+    ],
+    "post_text": []
+  },
+  {
+    "id": "alph_lkp_21",
+    "source": "alphabet_2025.pdf",
+    "intent": "Lookup",
+    "qa": {
+      "question": "Did general and administrative expenses increase or decrease from 2024 to 2025?",
+      "exe_ans": "increase",
+      "program": "neural"
+    },
+    "pre_text": [
+      "General and administrative expenses: 2024=$14,188 million, 2025=$21,482 million"
+    ],
+    "table": [
+      [
+        "",
+        "2024",
+        "2025"
+      ],
+      [
+        "General and administrative expenses",
+        "14188",
+        "21482"
+      ]
+    ],
+    "post_text": []
+  },
+  {
+    "id": "alph_lkp_22",
+    "source": "alphabet_2025.pdf",
+    "intent": "Lookup",
+    "qa": {
+      "question": "What was the total gain on equity securities reported in Other income (expense), net for 2025?",
+      "exe_ans": "$24,080 million",
+      "program": "neural"
+    },
+    "pre_text": [
+      "Gain (loss) on equity securities, net: 2023=392, 2024=3,714, 2025=24,080"
+    ],
+    "table": [
+      [
+        "",
+        "2023",
+        "2024",
+        "2025"
+      ],
+      [
+        "Gain (loss) on equity securities, net",
+        "392",
+        "3714",
+        "24080"
+      ]
+    ],
+    "post_text": []
+  },
+  {
+    "id": "alph_lkp_23",
+    "source": "alphabet_2025.pdf",
+    "intent": "Lookup",
+    "qa": {
+      "question": "What is the geographic region with the largest share of Alphabet's 2025 revenues?",
+      "exe_ans": "United States",
+      "program": "neural"
+    },
+    "pre_text": [
+      "The United States had the largest share of Alphabet 2025 revenues at 48%, followed by EMEA at 29%, APAC at 17%, and Other Americas at 6%."
+    ],
+    "table": [
+      [
+        "Region",
+        "2024",
+        "2025"
+      ],
+      [
+        "United States",
+        "49%",
+        "48%"
+      ],
+      [
+        "EMEA",
+        "29%",
+        "29%"
+      ],
+      [
+        "APAC",
+        "16%",
+        "17%"
+      ],
+      [
+        "Other Americas",
+        "6%",
+        "6%"
+      ]
+    ],
+    "post_text": []
+  },
+  {
+    "id": "alph_lkp_24",
+    "source": "alphabet_2025.pdf",
+    "intent": "Lookup",
+    "qa": {
+      "question": "What was Alphabet's total deferred revenue as of December 31, 2025?",
+      "exe_ans": "$8.6 billion",
+      "program": "neural"
+    },
+    "pre_text": [
+      "Total deferred revenue as of December 31, 2025 was $8.6 billion."
+    ],
+    "table": [],
+    "post_text": []
+  },
+  {
+    "id": "alph_lkp_25",
+    "source": "alphabet_2025.pdf",
+    "intent": "Lookup",
+    "qa": {
+      "question": "What is the primary source of revenue for Alphabet's Other Bets segment?",
+      "exe_ans": "autonomous transportation services and internet services",
+      "program": "neural"
+    },
+    "pre_text": [
+      "Revenues from Other Bets are generated primarily from the sale of autonomous transportation services and internet services."
+    ],
+    "table": [],
+    "post_text": []
+  },
+  {
+    "id": "cmp_01",
+    "source": "apple_2023.pdf",
+    "intent": "Comparison",
+    "pre_text": [
+      "Apple Inc. CONSOLIDATED STATEMENTS OF OPERATIONS (In millions).",
+      "Years ended September 30, 2023, September 24, 2022, and September 25, 2021."
+    ],
+    "table": [
+      [
+        "",
+        "2023",
+        "2022",
+        "2021"
+      ],
+      [
+        "Total net sales",
+        "383285",
+        "394328",
+        "365817"
+      ],
+      [
+        "Gross margin",
+        "169148",
+        "170782",
+        "152836"
+      ]
+    ],
+    "post_text": [],
+    "qa": {
+      "question": "How did Apple's gross margin percentage change from 2021 to 2023? Was the trend improving or declining?",
+      "program": "hybrid",
+      "exe_ans": "improving"
+    }
+  },
+  {
+    "id": "cmp_02",
+    "source": "apple_2023.pdf",
+    "intent": "Comparison",
+    "pre_text": [
+      "Products and Services gross margin percentage for 2023, 2022 and 2021."
+    ],
+    "table": [
+      [
+        "",
+        "2023",
+        "2022",
+        "2021"
+      ],
+      [
+        "Products gross margin %",
+        "36.5%",
+        "36.3%",
+        "35.3%"
+      ],
+      [
+        "Services gross margin %",
+        "70.8%",
+        "71.7%",
+        "69.7%"
+      ]
+    ],
+    "post_text": [],
+    "qa": {
+      "question": "Which segment had a higher gross margin percentage in 2023, Products or Services, and by how many percentage points?",
+      "program": "hybrid",
+      "exe_ans": "Services, by 34.3 percentage points"
+    }
+  },
+  {
+    "id": "cmp_03",
+    "source": "alphabet_2025.pdf",
+    "intent": "Comparison",
+    "pre_text": [
+      "Segment operating income (loss) for the year ended December 31 (in millions)."
+    ],
+    "table": [
+      [
+        "",
+        "2024",
+        "2025"
+      ],
+      [
+        "Google Services",
+        "121263",
+        "139404"
+      ],
+      [
+        "Google Cloud",
+        "6112",
+        "13910"
+      ],
+      [
+        "Other Bets",
+        "-4444",
+        "-7515"
+      ]
+    ],
+    "post_text": [],
+    "qa": {
+      "question": "Which segment showed the larger absolute increase in operating income from 2024 to 2025: Google Services or Google Cloud?",
+      "program": "hybrid",
+      "exe_ans": "Google Services"
+    }
+  },
+  {
+    "id": "cmp_04",
+    "source": "alphabet_2025.pdf",
+    "intent": "Comparison",
+    "pre_text": [
+      "Revenue by type for the year ended December 31 (in millions)."
+    ],
+    "table": [
+      [
+        "",
+        "2024",
+        "2025"
+      ],
+      [
+        "Google Search & other",
+        "198084",
+        "224532"
+      ],
+      [
+        "YouTube ads",
+        "36147",
+        "40367"
+      ],
+      [
+        "Google Cloud",
+        "43229",
+        "58705"
+      ],
+      [
+        "Total revenues",
+        "350018",
+        "402836"
+      ]
+    ],
+    "post_text": [],
+    "qa": {
+      "question": "Which grew faster from 2024 to 2025: Google Cloud revenues or Google Search & other revenues?",
+      "program": "hybrid",
+      "exe_ans": "Google Cloud"
+    }
+  },
+  {
+    "id": "cmp_05",
+    "source": "apple_2023.pdf",
+    "intent": "Comparison",
+    "pre_text": [
+      "Apple Inc. CONSOLIDATED STATEMENTS OF OPERATIONS (In millions).",
+      "Years ended September 30, 2023 and September 24, 2022."
+    ],
+    "table": [
+      [
+        "",
+        "2023",
+        "2022"
+      ],
+      [
+        "Total net sales",
+        "383285",
+        "394328"
+      ],
+      [
+        "Gross margin",
+        "169148",
+        "170782"
+      ],
+      [
+        "Operating income",
+        "114301",
+        "119437"
+      ]
+    ],
+    "post_text": [],
+    "qa": {
+      "question": "Did Apple's operating margin improve or decline from 2022 to 2023?",
+      "program": "hybrid",
+      "exe_ans": "declined"
+    }
+  },
+  {
+    "id": "sum_01",
+    "source": "apple_2023.pdf",
+    "intent": "Summarization",
+    "pre_text": [
+      "The Company's business, reputation, results of operations, financial condition, and stock price can be affected by a number of factors, whether currently known or unknown, including those described below.",
+      "Macroeconomic conditions, including slow growth, recession, high inflation, elevated interest rates, currency fluctuations, and geopolitical conflicts can adversely affect the Company.",
+      "The Company is exposed to economic risk from interest rates and foreign exchange rates.",
+      "Competition in each of the markets in which the Company competes is intense and involves rapidly evolving technologies, frequent product introductions, and increasingly lower prices.",
+      "The Company is dependent on the performance and capabilities of third-party cellular network carriers, retailers and resellers.",
+      "The Company's gross margins are subject to volatility and downward pressure due to continued industry-wide global product pricing pressures and a product mix shift.",
+      "The Company is currently subject to various legal proceedings and claims, including those related to intellectual property rights and government investigations."
+    ],
+    "table": [],
+    "post_text": [],
+    "qa": {
+      "question": "What are the main categories of risk that Apple discloses in its 2023 10-K?",
+      "program": "neural",
+      "exe_ans": "macroeconomic conditions, interest rate and foreign exchange risk, intense competition, dependence on third-party carriers and retailers, gross margin pressure, and legal and regulatory proceedings"
+    }
+  },
+  {
+    "id": "sum_02",
+    "source": "apple_2023.pdf",
+    "intent": "Summarization",
+    "pre_text": [
+      "The Company recognizes revenue at the amount to which it expects to be entitled when control of the products or services is transferred to its customers.",
+      "For most of the Company's Products net sales, control transfers when products are shipped.",
+      "For the Company's Services net sales, control transfers over time as services are delivered.",
+      "Products net sales include amortization of the deferred value of unspecified software upgrade rights.",
+      "Services net sales include amortization of the deferred value of content provided by certain Services arrangements.",
+      "The Company allocates revenues to specific performance obligations based on their relative standalone selling prices."
+    ],
+    "table": [],
+    "post_text": [],
+    "qa": {
+      "question": "How does Apple recognize revenue differently for Products versus Services, and what does each category include?",
+      "program": "neural",
+      "exe_ans": "For Products, revenue is recognized at the point when products are shipped, and it includes amortization of deferred software upgrade rights. For Services, revenue is recognized over time as services are delivered, and it includes amortization of deferred content values."
+    }
+  },
+  {
+    "id": "sum_03",
+    "source": "alphabet_2025.pdf",
+    "intent": "Summarization",
+    "pre_text": [
+      "Alphabet is a collection of businesses, the largest of which is Google.",
+      "We report Google in two segments, Google Services and Google Cloud, and all non-Google businesses collectively as Other Bets.",
+      "Google Services generates revenues primarily by delivering both performance and brand advertising that appears on Google Search & other properties, YouTube, and Google Network partners' properties.",
+      "Google Cloud revenues are derived from fees received for Google Cloud Platform services and Google Workspace collaboration tools.",
+      "Revenues from Other Bets are generated primarily from the sale of autonomous transportation services and internet services.",
+      "In 2025, we entered into definitive agreements to acquire Wiz, a leading cloud security platform, for $32.0 billion."
+    ],
+    "table": [],
+    "post_text": [],
+    "qa": {
+      "question": "How does Alphabet generate revenue across its three reporting segments?",
+      "program": "neural",
+      "exe_ans": "Google Services generates revenue primarily from advertising on Search, YouTube, and Google Network properties. Google Cloud generates revenue from cloud platform and Google Workspace services. Other Bets generates revenue from autonomous transportation and internet services."
+    }
+  },
+  {
+    "id": "sum_04",
+    "source": "alphabet_2025.pdf",
+    "intent": "Summarization",
+    "pre_text": [
+      "Our cost structure has two components: cost of revenues and operating expenses.",
+      "Cost of revenues is comprised of TAC (traffic acquisition costs) and other costs of revenues, including content acquisition costs, depreciation of technical infrastructure, and employee compensation.",
+      "Research and development expenses increased $11.8 billion from 2024 to 2025, primarily driven by increases in employee compensation expenses of $6.9 billion and depreciation expense of $2.4 billion.",
+      "Sales and marketing expenses increased $885 million from 2024 to 2025.",
+      "General and administrative expenses increased $7.3 billion from 2024 to 2025, primarily driven by an increase in expenses related to legal and other matters of $6.2 billion, largely the result of a $3.5 billion EC fine accrued in the third quarter of 2025 and a $1.4 billion legal accrual in Q2 2025."
+    ],
+    "table": [],
+    "post_text": [],
+    "qa": {
+      "question": "What are the main components of Alphabet's cost structure, and what drove the largest cost increases in 2025?",
+      "program": "neural",
+      "exe_ans": "Alphabet's costs consist of cost of revenues (TAC plus content acquisition, depreciation, and employee compensation) and operating expenses (R&D, sales and marketing, G&A). The largest increases in 2025 were driven by employee compensation and depreciation in R&D, and by legal and regulatory expenses including a $3.5 billion EC fine in G&A."
+    }
+  },
+  {
+    "id": "sum_05",
+    "source": "alphabet_2025.pdf",
+    "intent": "Summarization",
+    "pre_text": [
+      "In 2025, we entered into definitive agreements to acquire Wiz, a leading cloud security platform, for $32.0 billion, and Intersect, a provider of data center and energy infrastructure solutions, for $4.8 billion in cash plus the assumption of debt.",
+      "In 2025, we issued senior unsecured notes for net proceeds of $37.3 billion, to be used for general corporate purposes.",
+      "OI&E of $29.8 billion for the year ended December 31, 2025 included net gains on equity securities of $24.1 billion, primarily related to unrealized gains on our non-marketable equity securities.",
+      "Other Bets operating loss of $7.5 billion for the year ended December 31, 2025 included a $2.1 billion employee compensation charge for Waymo.",
+      "Repurchases of Class A and Class C shares totaled $45.4 billion for the year ended December 31, 2025.",
+      "Capital expenditures, which primarily reflected investments in technical infrastructure, were $91.4 billion for the year ended December 31, 2025.",
+      "As of December 31, 2025, we had 190,820 employees."
+    ],
+    "table": [],
+    "post_text": [],
+    "qa": {
+      "question": "What were Alphabet's most significant strategic and financial events in fiscal year 2025?",
+      "program": "neural",
+      "exe_ans": "Alphabet agreed to acquire Wiz for $32 billion and Intersect for $4.8 billion; issued $37.3 billion in senior unsecured notes; reported $24.1 billion in equity security gains boosting OI&E; repurchased $45.4 billion of its own shares; and invested $91.4 billion in capital expenditures, primarily for technical infrastructure."
+    }
+  }
+]

@@ -1,0 +1,29 @@
+# Financial RAG Systems Unified Dependencies
+# Python >= 3.10 required
+
+# Vector Databases & Retrieval
+qdrant-client>=1.7.0
+chromadb>=0.4.22
+sentence-transformers>=2.3.1
+rank-bm25>=0.2.2
+
+# Document & Image Processing
+pdfplumber>=0.10.3
+PyMuPDF>=1.23.8
+Pillow>=10.2.0
+
+# Deep Learning & Vision (Table Transformer)
+torch>=2.1.0
+torchvision>=0.16.0
+transformers>=4.37.0
+timm>=0.9.12
+
+# Symbolic Math & Execution
+numexpr>=2.8.8
+numpy>=1.26.0
+
+# Local LLM Integration & Utilities
+ollama>=0.1.6
+tqdm>=4.66.1
+requests>=2.31.0
+pydantic>=2.6.0

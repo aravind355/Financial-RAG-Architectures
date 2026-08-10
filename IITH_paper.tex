@@ -1,0 +1,677 @@
+%%
+%% IEEE Conference Paper Template
+%% Title: HierFinRAG & TableTransformerRAG: Hierarchical and Vision-Based RAG
+%%        for Complex Financial Document Question Answering
+%%
+\documentclass[conference]{IEEEtran}
+\IEEEoverridecommandlockouts
+
+%% ---- PACKAGES ---------------------------------------------------------------
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{makecell}
+\usepackage{array}
+\usepackage{colortbl}
+\usepackage{url}
+\usepackage{hyperref}
+\usepackage{balance}
+\usepackage{microtype}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric,arrows.meta,positioning,fit,calc}
+
+\hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue}
+
+%% ---- COLOUR HELPERS --------------------------------------------------------
+\definecolor{bestrow}{RGB}{220,255,220}
+\definecolor{rowgray}{RGB}{245,245,245}
+\newcommand{\best}[1]{\textbf{#1}}
+
+%% ============================================================================
+\begin{document}
+
+\title{HierFinRAG \& TableTransformerRAG: Hierarchical and Vision-Based\\
+Retrieval-Augmented Generation for Complex\\
+Financial Document Question Answering}
+
+\author{
+\IEEEauthorblockN{Aravind}
+\IEEEauthorblockA{\textit{School of Computer and Information Sciences}\\
+\textit{University of Hyderabad}, Hyderabad, India\\
+\textit{Work conducted during Summer Research Internship at IIT Hyderabad}}
+}
+
+\maketitle
+
+%% ---- ABSTRACT --------------------------------------------------------------
+\begin{abstract}
+Financial document question answering (QA) over large corporate annual reports
+demands precision that na\"{i}ve flat Retrieval-Augmented Generation (RAG)
+systems cannot deliver: tables must be parsed with structural fidelity,
+arithmetic must be exact, and the system must handle long ($>$100~page) PDFs
+without hallucinating numbers. We present two advanced RAG architectures
+benchmarked on a 110-question FinQA-style dataset drawn from the Apple 2023 and
+Alphabet 2025 10-K filings. \textbf{HierFinRAG} constructs a four-level
+document chunk tree (section, text, table, cell) and retrieves via a three-level
+pipeline combining BM25 sparse search, BGE-M3 dense embeddings, Reciprocal Rank
+Fusion (RRF), and a cross-encoder reranker. A symbolic Domain-Specific Language
+(DSL) calculator evaluates arithmetic deterministically to eliminate LLM
+hallucinations, achieving \textbf{40.0\%} execution accuracy and
+\textbf{93.4\%} retrieval recall. \textbf{TableTransformerRAG} replaces
+heuristic PDF table parsing with Microsoft's Table Transformer (TATR), a
+DETR-based vision model that detects and parses tables directly from 300-DPI
+rendered page images. After four iterative engineering rounds addressing TATR
+bounding-box mapping errors, context overload, and a two-pass extraction
+strategy, TableTransformerRAG achieves \textbf{48.2\%} execution accuracy and
+\textbf{89.7\%} recall---surpassing HierFinRAG on accuracy by 8.2~percentage
+points. Both systems run fully locally via Ollama using open-weight models,
+demonstrating that high-quality financial document intelligence is achievable
+without commercial cloud infrastructure.
+\end{abstract}
+
+\begin{IEEEkeywords}
+Retrieval-Augmented Generation, Financial NLP, Hierarchical Retrieval, Table
+Detection, DETR, Symbolic Reasoning, Question Answering, Large Language Models
+\end{IEEEkeywords}
+
+%% ============================================================================
+\section{Introduction}
+%% ============================================================================
+
+Corporate annual reports (Form 10-K filings) represent one of the most
+challenging document types for automated question answering. They span hundreds
+of pages, intermix dense prose with numerical tables, and require answering
+questions that necessitate both exact factual retrieval and precise multi-step
+arithmetic. Financial analysts must navigate cross-sectional dependencies, fiscal
+year terminology (e.g., ``September~24, 2022'' referring to FY2022), and
+magnitude conventions (\$millions vs.\ \$billions) that change silently across
+pages.
+
+Standard RAG pipelines---which chunk documents uniformly, embed chunks with a
+dense encoder, and retrieve the top-$k$ by cosine similarity---fail
+catastrophically in this domain. In our evaluation, a flat baseline (BasicRAG)
+achieves only \textbf{3.0\%} execution accuracy (EM) despite 80.3\% retrieval
+recall, confirming that the bottleneck is structural understanding and arithmetic
+reasoning, not retrieval coverage alone.
+
+This paper makes the following contributions:
+\begin{enumerate}
+  \item We design and evaluate \textbf{HierFinRAG}, a three-level hierarchical
+        retrieval system with intent routing, BM25+dense hybrid search, Reciprocal
+        Rank Fusion (RRF), and a symbolic FinQA DSL calculator---achieving 40.0\%
+        EM and 93.4\% retrieval recall on a 110-question benchmark.
+  \item We design \textbf{TableTransformerRAG}, which replaces heuristic PDF
+        parsing with DETR-based visual table detection (Microsoft Table
+        Transformer) and achieves 48.2\% EM after four iterative engineering
+        rounds.
+  \item We document 13 engineering bugs and their fixes across the full
+        development cycle, providing a rigorous failure analysis and lessons for
+        practitioners building financial RAG systems.
+  \item We demonstrate a \textbf{retrieval-generation paradox}: increasing
+        retrieval context for 7B models beyond a threshold degrades generation
+        quality, requiring intent-conditioned context sizing.
+\end{enumerate}
+
+All experiments are conducted entirely locally using Ollama with Qwen~2.5-7B,
+Mistral~7B, and LLaVA~7B---no commercial API is required.
+
+%% ============================================================================
+\section{Related Work}
+%% ============================================================================
+
+\subsection{Retrieval-Augmented Generation}
+RAG~\cite{lewis2020rag} augments LLM generation with retrieved evidence,
+reducing hallucinations on knowledge-intensive tasks. Standard dense retrieval
+(e.g., DPR~\cite{karpukhin2020dpr}) encodes documents and queries into a shared
+vector space and retrieves by maximum inner product. Hybrid retrieval~\cite{chen2021evaluating}
+fuses sparse (BM25) and dense signals, consistently outperforming either alone
+on heterogeneous document corpora. Reciprocal Rank Fusion~\cite{cormack2009rrf}
+provides a score-free merging strategy that is robust to ranking calibration
+mismatches.
+
+\subsection{Financial Document Understanding}
+FinQA~\cite{chen2021finqa} introduced the multi-step financial reasoning
+challenge: given a table and supporting text, answer numerical questions using a
+structured DSL program evaluated by an interpreter. Our symbolic calculator is
+inspired by this formulation but adapts it for open-domain retrieval over full
+10-K corpora rather than pre-segmented gold contexts. TAT-QA~\cite{zhu2021tatqa}
+further motivates hybrid table-text reasoning. HIBRIDS~\cite{zhu2022hibrids}
+studies hierarchical document summarization in financial contexts.
+
+\subsection{Visual Table Parsing}
+Table detection and structure recognition are fundamental to document AI.
+The Table Transformer (TATR)~\cite{smock2022pubtables} fine-tunes DETR~\cite{carion2020detr}
+on PubTables-1M for table detection and structure recognition, achieving
+state-of-the-art on academic document benchmarks. We adapt TATR to
+financial PDF pages rendered at 300~DPI, including a novel coordinate mapping
+from crop-image pixel space to PDF-point space.
+
+\subsection{Local LLM Inference}
+Recent open-weight models such as Qwen~2.5~\cite{qwen2025} and
+Mistral~\cite{jiang2023mistral} enable high-quality inference on consumer hardware.
+Ollama provides an OpenAI-compatible local serving API. Our work evaluates these
+models in a challenging structured reasoning scenario and characterises their
+context-length sensitivity.
+
+%% ============================================================================
+\section{Problem Formulation \& Dataset}
+%% ============================================================================
+
+\subsection{Task Definition}
+Given a natural language question $q$ and a corpus of financial PDF documents
+$\mathcal{D}$, the system must produce an answer $\hat{a}$ such that
+$\hat{a} \approx a^*$, the ground-truth answer. Questions require either
+(i) factual lookup of a specific value in a table cell or paragraph, or
+(ii) multi-step arithmetic over retrieved values (e.g., percentage change
+between two fiscal years). We define four intent categories:
+
+\begin{itemize}
+  \item \textbf{Numerical} ($n=50$): Arithmetic over retrieved values
+        (e.g., percentage change, ratios).
+  \item \textbf{Lookup} ($n=50$): Direct factual extraction of a specific
+        value from a table or text.
+  \item \textbf{Comparison} ($n=5$): Qualitative comparison across periods
+        or segments.
+  \item \textbf{Summarization} ($n=5$): Open-ended explanation or description.
+\end{itemize}
+
+\subsection{Evaluation Dataset}
+We construct a 110-question FinQA-style benchmark drawn from:
+\begin{itemize}
+  \item \textbf{Apple Inc.\ 2023 Form 10-K} (55 questions): A clean,
+        well-structured PDF with native bookmarks but date-encoded column
+        headers (e.g., ``September~24, 2022'') that cause systematic LLM
+        year-mapping errors.
+  \item \textbf{Alphabet Inc.\ 2025 Form 10-K} (55 questions): A larger
+        document with \emph{no} internal PDF bookmarks, causing zero section
+        nodes to be detected by heuristic parsers, requiring a special fallback
+        strategy.
+\end{itemize}
+
+Each question record contains: \texttt{question}, \texttt{answer},
+\texttt{intent}, \texttt{source} (PDF filename), and optional FinQA gold
+context fields (\texttt{pre\_text}, \texttt{table\_text}, \texttt{post\_text}).
+The gold context is used \emph{exclusively} to compute Retrieval Recall
+and is never passed to the LLM generator.
+
+\subsection{Evaluation Metrics}
+\begin{itemize}
+  \item \textbf{Execution Accuracy (EM)}: Exact-match with 1\% relative
+        tolerance and bidirectional scale reconciliation (decimal/percentage,
+        millions/billions).
+  \item \textbf{Scaled F1}: Token-level overlap in $[0,1]$.
+  \item \textbf{Retrieval Recall}: Fraction of gold context chunks present
+        in the top-$k$ retrieved set (keyword overlap matching).
+  \item \textbf{Latency}: Total wall-clock seconds for all 110 questions.
+\end{itemize}
+
+%% ============================================================================
+\section{System Architecture}
+%% ============================================================================
+
+\subsection{BasicRAG (Flat Baseline)}
+BasicRAG is a minimal RAG baseline with no structural awareness:
+\texttt{pdfplumber} extracts text and tables as flat chunks; BGE-M3 encodes
+them into Qdrant; top-$k$ cosine retrieval feeds raw context to the LLM.
+Despite 80.3\% retrieval recall, BasicRAG achieves only 3.0\% EM, confirming
+that retrieval coverage alone does not produce accurate financial QA.
+
+\subsection{HierFinRAG}
+
+\subsubsection{Hierarchical Document Parser}
+The parser (\texttt{pipeline/parser.py}) builds a four-level chunk tree:
+\textbf{Section} nodes (short, title-cased or ALL-CAPS headings),
+\textbf{Text} paragraphs, \textbf{Table} chunks (with \texttt{col\_headers},
+\texttt{row\_headers}, and \texttt{rows}), and \textbf{Cell} chunks (one per
+row$\times$column intersection, formatted as ``\textit{row | col: value}'').
+Each chunk carries a globally unique \texttt{chunk\_id}, \texttt{parent\_id},
+and \texttt{children\_ids}, forming a navigable document graph.
+
+\subsubsection{Intent Router}
+A two-stage classifier (\texttt{pipeline/router.py}) routes each query into
+one of four intent classes. Stage~1 applies rule-based weighted keyword scoring
+over four vocabulary sets augmented by math-operator pattern matching (fast,
+no LLM call). Stage~2 invokes a single-token Ollama call as a fallback when
+Stage~1 scores are zero or tied.
+
+\subsubsection{Three-Level Retrieval}
+\textbf{Level~1} applies metadata source filtering (preventing cross-document
+retrieval) and query expansion for numerical/comparison intents: year tokens
+matching four-digit year patterns (e.g., \texttt{r"\textbackslash b(20\textbackslash d\{2\})\textbackslash b"}) and financial
+keywords are appended to shift query embeddings toward tabular content.
+
+\textbf{Level~2} executes hybrid BM25 ($\texttt{rank\_bm25.BM25Okapi}$) +
+BGE-M3 dense search over section children, fused with Reciprocal Rank Fusion:
+\begin{equation}
+\text{RRF}(d) = \sum_{i \in \{\text{BM25},\,\text{dense}\}} \frac{1}{k + \text{rank}_i(d)},
+\quad k = 60.
+\label{eq:rrf}
+\end{equation}
+A cross-encoder reranker (\texttt{BAAI/\allowbreak bge-\allowbreak reranker-\allowbreak v2-\allowbreak m3}) rescores the
+top-$N$ candidates.
+
+\textbf{Level~3} runs dense matching against individual cell chunks
+(\texttt{type=``cell''}) to isolate the exact row-column intersection for
+numerical queries.
+
+\subsubsection{Symbolic-Neural Fusion Generator}
+To eliminate arithmetic hallucinations, the generator
+(\texttt{pipeline/generator.py}) prompts the LLM to produce a FinQA DSL
+program rather than computing the answer directly:
+\begin{equation}
+\texttt{percentage\_change}(v_{\text{old}},\, v_{\text{new}}) = \frac{v_{\text{new}} - v_{\text{old}}}{v_{\text{old}}}
+\end{equation}
+\noindent The \texttt{Symbolic\allowbreak Calculator} module (\texttt{pipeline/\allowbreak symbolic.py}) evaluates
+the program deterministically via \texttt{numexpr}, supporting nested
+expressions up to depth 15 (\texttt{add}, \texttt{subtract}, \texttt{multiply},
+\texttt{divide}, \texttt{percentage\_change}, \texttt{percentage}). This
+decouples arithmetic correctness from LLM generation quality.
+
+\subsection{TableTransformerRAG}
+
+\subsubsection{Vision-Based Table Parsing}
+Instead of heuristic \texttt{pdfplumber} table extraction, each PDF page is
+rendered to a PIL Image at 300~DPI using PyMuPDF (\texttt{fitz}). The TATR
+detection model (\texttt{microsoft/\allowbreak table-\allowbreak transformer-\allowbreak detection}) identifies
+table bounding boxes (confidence threshold = 0.85). Each detected region is
+cropped (with 5~px padding) and passed to the TATR structure recognition
+model (\texttt{microsoft/\allowbreak table-\allowbreak transformer-\allowbreak structure-\allowbreak recognition-\allowbreak v1.1-\allowbreak all}),
+which outputs row, column, and header bounding boxes in crop-pixel coordinates.
+
+\subsubsection{Coordinate Mapping}
+Cell bounding boxes are mapped from crop-pixel space to PDF-point space using
+the actual PIL crop dimensions $(w_c, h_c)$ and the table's PDF-point extent
+$(x_1, y_1, x_2, y_2)$:
+\begin{align}
+x_{\text{pdf}} &= x_1 + \frac{x_{\text{px}}}{w_c}(x_2 - x_1), \label{eq:xmap}\\
+y_{\text{pdf}} &= y_1 + \frac{y_{\text{px}}}{h_c}(y_2 - y_1). \label{eq:ymap}
+\end{align}
+Word objects (native PDF text in PDF-point coordinates) are matched to cells
+by centre-point containment, recovering accurate text without OCR.
+
+\subsubsection{Non-Table Text Recovery}
+Words not covered by any detected table bounding box are grouped by
+$y$-coordinate proximity into lines, merged into paragraphs, and split at
+500~words. This produces text chunks structurally identical to HierFinRAG,
+enabling a fair downstream comparison.
+
+\subsubsection{Retrieval and Generation}
+TableTransformerRAG shares the same three-level retrieval, RRF hybrid search,
+cross-encoder reranker, intent router, and symbolic DSL calculator as
+HierFinRAG. The only difference is table chunk provenance (visual TATR
+detection vs.\ heuristic pdfplumber parsing).
+
+%% ============================================================================
+\section{Engineering Challenges \& Iterative Optimization}
+%% ============================================================================
+
+Developing reliable financial RAG systems required identifying and resolving
+13 distinct failure modes across the parsing, retrieval, generation, and
+evaluation stages. We describe the most impactful ones below.
+
+\subsection{Evaluation Integrity: Gold Context Leakage (Bug~1)}
+The FinQA dataset provides a ``gold context'' (pre\_text, table\_text,
+post\_text) alongside each question. In an early implementation, this gold
+context was passed directly to the LLM generator, bypassing retrieval entirely.
+This inflated apparent accuracy to $\sim$70\%; the true EM after isolation
+was 3.0\% for BasicRAG. \textbf{Fix:} \texttt{evaluate.py} was rewritten to
+pass only the raw question and source filter to the retrieval pipeline; gold
+context is used solely to compute Retrieval Recall.
+
+\subsection{Alphabet 10-K: Zero Section Nodes (Bug~6)}
+Alphabet's 2025 10-K headings failed the heuristic \texttt{\_is\_header()} test
+(short, title-cased, no trailing period), producing zero section chunks.
+Level~1 retrieval, which searches over section nodes, returned zero results for
+all Alphabet queries, driving recall to 0\%.
+
+\textbf{Fix (Alphabet Section Fallback):} After parsing, if section count is
+zero, all text chunks are promoted to \texttt{type=``section''} and linked to
+adjacent table chunks as children:
+\begin{equation}
+\text{children}(c_i) = \bigcup_{p \in \{pg-1, pg, pg+1\}} \text{tables}(p)
+\end{equation}
+where $pg$ is the page of text chunk $c_i$.
+
+\subsection{TATR Bounding-Box Coordinate Error (Bug~13)}
+TATR structure model outputs coordinates in crop-image-pixel space.
+The initial implementation mapped these using the full-page scale factor,
+causing systematic cell offset errors and empty text extractions.
+\textbf{Fix:} Equations~\eqref{eq:xmap}--\eqref{eq:ymap} use the actual PIL
+crop dimensions, resolving the offset.
+
+\subsection{The Retrieval-Generation Paradox (Bug~8)}
+In Round~3, increasing \texttt{top\_n} from 10 to 15 raised Retrieval Recall
+from 69.2\% to 89.7\%, but EM dropped from 38.2\% to 36.4\%. A 7B
+parameter model with 15 competing financial fragments showed attention
+divergence, producing narrative prose instead of precise value extraction.
+
+\textbf{Fix (Intent-Conditioned Context Sizing):} \texttt{top\_n} is set by
+intent at query time: Lookup = 10, Summarization = 15, and Numerical = 10 with
+table cell relevance scores boosted by $+3.0$ above narrative text to force
+tabular figures to the top of the LLM context window.
+
+\subsection{Lookup Narrative Rambling (Bug~12)}
+For factual lookup queries, the 7B LLM answered correctly but embedded the
+answer inside multi-sentence prose. Automated exact-match evaluation failed
+because no clean extracted value was found. 94\% of baseline Lookup questions
+scored zero.
+
+\textbf{Fix (Two-Pass Extraction):} If a Lookup answer exceeds 50 characters,
+a second zero-shot extraction call is made with the directive: \emph{``Give
+ONLY the exact value that answers the question. At most 10 words. No sentences,
+no explanation.''} This decouples reasoning quality from output format
+adherence and raised Lookup accuracy from 6.0\% to 54.0\% ($+800\%$).
+
+\subsection{TableTransformerRAG Iterative Optimization Summary}
+Table~\ref{tab:rounds} summarises the four engineering rounds:
+
+\begin{table}[htbp]
+\caption{TableTransformerRAG Optimization Across Four Rounds}
+\label{tab:rounds}
+\centering
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{l c c c}
+\toprule
+\textbf{Stage} & \textbf{EM (\%)} & \textbf{F1} & \textbf{Recall (\%)} \\
+\midrule
+Baseline (R0) & 26.4 & 0.274 & 37.5 \\
+Round 1       & 34.5 & 0.267 & 80.1 \\
+Round 2       & 38.2 & 0.332 & 69.2 \\
+Round 3       & 36.4 & 0.282 & \textbf{89.7} \\
+\rowcolor{bestrow}
+\textbf{Round 4 (Final)} & \textbf{48.2} & \textbf{0.387} & \textbf{89.7} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\noindent\textbf{Round 1} raised the TATR detection threshold ($0.70 \to 0.85$)
+and normalised BM25 tokenisation; Recall: $37.5\% \to 80.1\%$.
+\textbf{Round 2} added row-signature deduplication, heuristic header promotion,
+and the Alphabet section fallback; Comparison accuracy: $0\% \to 60\%$.
+\textbf{Round 3} injected section text payload into Level-2 candidates;
+Recall: $89.7\%$ (peak), but EM dipped due to context overload.
+\textbf{Round 4} applied intent-conditioned context sizing, two-pass extraction,
+date-column mapping directives, and bidirectional scale reconciliation;
+EM: $48.2\%$ (peak).
+
+%% ============================================================================
+\section{Experimental Results}
+%% ============================================================================
+
+\subsection{HierFinRAG: LLM Backend Comparison}
+
+Table~\ref{tab:hier} compares all four HierFinRAG configurations on 110~QA
+pairs. All share identical retrieval recall (93.4\%), confirming the bottleneck
+is generation quality, not retrieval coverage. Qwen~2.5-7B achieves the highest
+EM (40.0\%). LLaVA~7B adds $+5{,}505$~s latency for no accuracy gain, as
+vision-language models are ill-suited to text-only financial QA. Qdrant is
+$\approx$47\% faster than ChromaDB at identical accuracy.
+
+\begin{table}[htbp]
+\caption{HierFinRAG: LLM and Vector-Store Configuration Comparison (110~QA)}
+\label{tab:hier}
+\centering
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{l c c c r}
+\toprule
+\textbf{Config} & \textbf{EM} & \textbf{F1} & \textbf{Rec.} & \textbf{Lat. (s)} \\
+\midrule
+\textbf{Qwen 2.5 + Qdrant} & \best{0.400} & 0.240 & \best{0.934} & \best{8,097} \\
+Mistral 7B + Qdrant & 0.318 & 0.155 & \best{0.934} & 8,878 \\
+LLaVA 7B + Qdrant  & 0.273 & 0.167 & \best{0.934} & 13,602 \\
+Qwen 2.5 + Chroma  & \best{0.400} & \best{0.248} & \best{0.934} & 11,966 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Cross-System Comparison}
+
+Table~\ref{tab:cross} compares the best configuration of each system.
+TableTransformerRAG (Round~4) achieves the highest EM and F1. HierFinRAG
+achieves slightly higher retrieval recall due to its reliable heuristic
+section detection on Apple (which has proper PDF bookmarks). BasicRAG, despite
+strong recall, fails on generation---confirming that structure-aware retrieval
+and symbolic arithmetic are both necessary.
+
+\begin{table}[htbp]
+\caption{Cross-System Best-Configuration Comparison (110~QA pairs)}
+\label{tab:cross}
+\centering
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{l c c c r}
+\toprule
+\textbf{System} & \textbf{EM} & \textbf{F1} & \textbf{Recall} & \textbf{Lat. (s)} \\
+\midrule
+BasicRAG        & 0.030 & 0.104 & 0.803 & 1,375 \\
+HierFinRAG      & 0.400 & 0.240 & \best{0.934} & 8,097 \\
+\rowcolor{bestrow}
+\textbf{TATR-R4} & \best{0.482} & \best{0.387} & 0.897 & $\approx$4,800 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Per-Intent Analysis}
+
+Table~\ref{tab:intent} shows route-level accuracy. TableTransformerRAG-R4
+outperforms HierFinRAG on Lookup (54.0\% vs.\ 38.0\%) and equals it on
+Summarization (60.0\%). Both systems score 0/5 on Comparison without the
+evaluator fix (Round~2); after the fix, TATR-R4 achieves 3/5 (60.0\%).
+HierFinRAG shows stronger Numerical performance (22/50 vs.\ 20/50) due to
+more reliable table structure from pdfplumber on Apple's clean tables.
+
+\begin{table}[htbp]
+\caption{Per-Intent Execution Accuracy: Best Configuration per System}
+\label{tab:intent}
+\centering
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{l c c c c}
+\toprule
+\textbf{System} & \textbf{Num.} & \textbf{Lookup} & \textbf{Cmp.} & \textbf{Sum.} \\
+\midrule
+BasicRAG       & 3/50  & 0/50  & --   & --  \\
+HierFinRAG     & 22/50 & 19/50 & 0/5  & 3/5 \\
+\rowcolor{bestrow}
+\textbf{TATR-R4} & 20/50 & \best{27/50} & \best{3/5} & \best{3/5} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Per-Document Analysis}
+
+Table~\ref{tab:perdoc} shows breakdown by document. HierFinRAG achieves equal
+EM on both documents (40.0\%), reflecting consistent retrieval. TATR-R4 scores
+higher on Alphabet (56.4\% vs.\ 40.0\%) but slightly lower on Apple,
+indicating that visual table detection better handles Alphabet's bookmark-free
+structure once the section fallback is active.
+
+\begin{table}[htbp]
+\caption{Per-Document Breakdown: Best Config per System}
+\label{tab:perdoc}
+\centering
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{l cc cc}
+\toprule
+\multirow{2}{*}{\textbf{System}} &
+\multicolumn{2}{c}{\textbf{Apple 2023}} &
+\multicolumn{2}{c}{\textbf{Alphabet 2025}} \\
+\cmidrule(lr){2-3}\cmidrule(lr){4-5}
+ & \textbf{EM} & \textbf{Rec.} & \textbf{EM} & \textbf{Rec.} \\
+\midrule
+BasicRAG    & 0.040 & 0.689 & 0.020 & 0.917 \\
+HierFinRAG  & 0.400 & \best{0.931} & 0.400 & \best{0.937} \\
+\rowcolor{bestrow}
+\textbf{TATR-R4} & 0.400 & 0.901 & \best{0.564} & 0.893 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+%% ============================================================================
+\section{Discussion}
+%% ============================================================================
+
+\subsection{Retrieval-Generation Paradox}
+Our experiments reveal a fundamental tension in deploying 7B parameter models
+for structured information retrieval. While retrieval recall saturated at 89.7\%
+in Round~3, execution accuracy simultaneously declined. This \emph{retrieval-
+generation paradox} arises because small language models have limited attention
+capacity: providing 15 dense financial chunks overloads the context window,
+causing the model to produce verbose narrative responses rather than precise
+numerical extraction. Intent-conditioned context sizing (Section~V-D) resolves
+this by matching context volume to the model's capacity for each query type.
+
+\subsection{Symbolic Arithmetic vs. LLM Generation}
+The symbolic DSL calculator is the single most impactful design decision in both
+HierFinRAG and TableTransformerRAG. Directly asking a 7B LLM to compute
+$(394{,}328 - 383{,}285) / 383{,}285$ yields unreliable results due to
+tokenisation of large numbers and arithmetic hallucination. The DSL approach
+separates symbolic program synthesis (LLM's strength) from exact arithmetic
+evaluation (\texttt{numexpr}'s strength), achieving deterministic numerical
+correctness.
+
+\subsection{Vision-Based vs.\ Heuristic Table Parsing}
+TATR outperforms pdfplumber on Alphabet's unstructured PDF
+(56.4\% vs.\ 40.0\% EM) but is approximately equal on Apple's clean document
+(40.0\% vs.\ 40.0\%). This suggests that vision-based detection is most
+beneficial for documents with non-standard formatting, mixed layouts, or absent
+PDF bookmarks. The 300~DPI rendering requirement and CPU/GPU inference overhead
+make TATR slower per-document during indexing, but its superior table boundary
+detection justifies this cost for complex financial filings.
+
+\subsection{LLM Selection for Financial QA}
+Qwen~2.5-7B significantly outperforms Mistral~7B (EM: 40.0\% vs.\ 31.8\%) and
+LLaVA~7B (40.0\% vs.\ 27.3\%) on this benchmark. LLaVA's 13,602~s latency
+(vs.\ 8,097~s for Qwen) reflects the overhead of its vision encoder being
+invoked for text-only inputs. For practitioners choosing between open-weight
+models for financial RAG, Qwen~2.5-7B offers the best accuracy-latency tradeoff
+in our evaluation.
+
+\subsection{Comparison Intent: An Open Problem}
+All systems achieve 0/5 on Comparison queries before the Round~2 evaluator fix,
+and at most 3/5 (60.0\%) afterward. Multi-hop comparison across documents
+(e.g., ``Which segment grew faster between Apple and Alphabet?'') requires
+reasoning that spans retrieval from multiple independent sources and cannot be
+resolved in a single-pass architecture. This remains an open research problem
+for local-only, sub-10B models.
+
+\balance
+%% ============================================================================
+\section{Conclusions}
+%% ============================================================================
+
+We presented HierFinRAG and TableTransformerRAG, two complementary architectures
+for open-domain financial document question answering over corporate 10-K filings.
+Our key findings are:
+
+\begin{enumerate}
+  \item \textbf{Hierarchy + Symbolic Arithmetic are necessary}: HierFinRAG
+        achieves a 13$\times$ improvement over the flat baseline (40.0\% vs.\
+        3.0\% EM).
+  \item \textbf{Visual Table Detection Improves on Complex Documents}:
+        TableTransformerRAG surpasses HierFinRAG (48.2\% vs.\ 40.0\% EM)
+        primarily through better table parsing on bookmark-free PDFs.
+  \item \textbf{Two-Pass Extraction}: A second zero-shot extraction call
+        raises Lookup accuracy by 800\% (6\% $\to$ 54\%) without any model
+        modification or fine-tuning.
+  \item \textbf{Context Sizing Must Be Intent-Conditioned}: More context
+        hurts accuracy for 7B models; matching context volume to intent type
+        is critical.
+  \item \textbf{Evaluation Integrity}: Gold-context isolation is paramount;
+        leakage can inflate apparent accuracy by $>$20$\times$ (3\% real
+        vs.\ $\sim$70\% inflated).
+  \item \textbf{Local LLMs Are Viable}: All results are achieved via Ollama
+        with open-weight models, demonstrating that commercial API independence
+        is achievable for financial document intelligence.
+\end{enumerate}
+
+% \subsection{Future Work}
+% Future directions include: (1) a unified pipeline combining HierFinRAG's
+% reliable text retrieval with TATR's visual table detection; (2) multi-agent
+% chain-of-thought for multi-hop Comparison queries; (3) LoRA fine-tuning for
+% fiscal year-end date column alignment; and (4) evaluation on broader 10-K
+% corpora across industries and fiscal years.
+
+%% ============================================================================
+\begin{thebibliography}{00}
+
+\bibitem{lewis2020rag}
+P.~Lewis, E.~Perez, A.~Piktus, F.~Petroni, V.~Karpukhin, N.~Goyal, H.~K\"{u}ttler,
+M.~Lewis, W.~Yih, T.~Rockt\"{a}schel, S.~Riedel, and D.~Kiela,
+``Retrieval-augmented generation for knowledge-intensive NLP tasks,''
+in \textit{Proc.\ Adv.\ Neural Inf.\ Process.\ Syst.\ (NeurIPS)}, 2020.
+
+\bibitem{karpukhin2020dpr}
+V.~Karpukhin, B.~O\u{g}uz, S.~Min, P.~Lewis, L.~Wu, S.~Edunov, D.~Chen,
+and W.~Yih,
+``Dense passage retrieval for open-domain question answering,''
+in \textit{Proc.\ Conf.\ Empirical Methods Natural Lang.\ Process.\ (EMNLP)},
+2020, pp.~6769--6781.
+
+\bibitem{chen2021evaluating}
+Y.~Chen, R.~Quach, and H.~Ji,
+``Evaluating open-domain question answering in the era of large language models,''
+\textit{arXiv:2305.06984}, 2023.
+
+\bibitem{cormack2009rrf}
+G.~V.~Cormack, C.~L.~A.~Clarke, and S.~Buettcher,
+``Reciprocal rank fusion outperforms condorcet and individual rank learning methods,''
+in \textit{Proc.\ ACM SIGIR}, 2009, pp.~758--759.
+
+\bibitem{chen2021finqa}
+Z.~Chen, W.~Chen, C.~Smiley, S.~Shah, I.~Amin, and C.~Sanyal,
+``FinQA: A dataset of numerical reasoning over financial data,''
+in \textit{Proc.\ Conf.\ Empirical Methods Natural Lang.\ Process.\ (EMNLP)},
+2021, pp.~3697--3711.
+
+\bibitem{zhu2021tatqa}
+F.~Zhu, W.~Lei, Y.~Huang, C.~Wang, S.~Zhang, J.~Lv, F.~Feng, and T.~Chua,
+``TAT-QA: A question answering benchmark on a hybrid of tabular and textual content
+in finance,'' in \textit{Proc.\ ACL}, 2021, pp.~3277--3287.
+
+\bibitem{zhu2022hibrids}
+Z.~Zhu, H.~Tan, B.~Zhang, and Q.~Chen,
+``HIBRIDS: Attention with hierarchical biases for structure-aware long
+document summarization,''
+in \textit{Proc.\ ACL}, 2022, pp.~786--807.
+
+\bibitem{smock2022pubtables}
+B.~Smock, R.~Pesala, and R.~Abraham,
+``PubTables-1M: Towards comprehensive table extraction from unstructured
+documents,'' in \textit{Proc.\ IEEE/CVF CVPR}, 2022, pp.~4634--4642.
+
+\bibitem{carion2020detr}
+N.~Carion, F.~Massa, G.~Synnaeve, N.~Usunier, A.~Kirillov, and S.~Zagoruyko,
+``End-to-end object detection with transformers,''
+in \textit{Proc.\ ECCV}, 2020, pp.~213--229.
+
+\bibitem{qwen2025}
+Q.~Team,
+``Qwen2.5 technical report,''
+\textit{arXiv:2412.15115}, 2025.
+
+\bibitem{jiang2023mistral}
+A.~Q.~Jiang, A.~Sablayrolles, A.~Mensch, C.~Bamford, D.~S.~Chaplot,
+D.~de las Casas, F.~Bressand, G.~Lengyel, G.~Lample, L.~Saulnier,
+L.~R.~Lavaud, M.-A.~Lachaux, P.~Stock, T.~L.~Scao, T.~Lavril,
+T.~Wang, T.~Lacroix, and W.~E.~Sayed,
+``Mistral 7B,''
+\textit{arXiv:2310.06825}, 2023.
+
+\bibitem{bge2023}
+Y.~Xiao, C.~Lyu, T.~Su, J.~Wang, Y.~Pan, Z.~Lian, L.~Gui, and K.~Feng,
+``C-pack: Packaged resources to advance general Chinese embedding,''
+\textit{arXiv:2309.07597}, 2023.
+
+\bibitem{qdrant}
+Qdrant, ``Qdrant: Vector database for the next generation of AI applications,''
+\textit{https://qdrant.tech/}, 2023.
+
+\end{thebibliography}
+
+\end{document}

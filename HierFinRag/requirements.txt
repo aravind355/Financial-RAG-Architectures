@@ -1,0 +1,33 @@
+# =============================================================================
+# HierFinRAG — Python Dependencies
+# =============================================================================
+
+# ── Core ML / Embeddings ────────────────────────────────────────────────────
+sentence-transformers>=2.2.0   # BGE-M3 embeddings
+torch>=2.0.0                   # PyTorch (CUDA build recommended)
+
+# ── Graph Neural Network (HierFinRAG TTGNN) ─────────────────────────────────
+# Install PyG wheel matching your CUDA version from: https://pytorch-geometric.readthedocs.io
+torch_geometric>=2.3.0
+
+# ── Vector Database ──────────────────────────────────────────────────────────
+qdrant-client>=1.7.0           # Local persistent vector store
+
+# ── Sparse Retrieval (Level-2 BM25) ─────────────────────────────────────────
+rank_bm25>=0.2.2               # BM25Okapi for keyword retrieval
+
+# ── LLM API (Qwen via OpenRouter) ────────────────────────────────────────────
+openai>=1.0.0                  # OpenAI-compatible client for Qwen API
+
+# ── PDF Parsing ───────────────────────────────────────────────────────────────
+pdfplumber                     # Table extraction from PDFs
+PyMuPDF                        # Screenshot / image extraction
+Pillow                         # Image processing
+
+# ── Math Evaluation ───────────────────────────────────────────────────────────
+numexpr                        # Safe expression evaluation for DSL programs
+
+# ── Utilities ─────────────────────────────────────────────────────────────────
+numpy>=1.24.0
+requests                       # Dataset downloads
+tqdm>=4.65.0                   # Progress bars

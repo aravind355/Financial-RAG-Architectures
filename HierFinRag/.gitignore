@@ -1,0 +1,20 @@
+# Virtual Environments
+ragenv/
+venv/
+.env
+
+# Python Cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+#data
+data/chromadb/
+data/qdrant/
+scratch/
+
+# OS/IDE generated files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

@@ -1,0 +1,22 @@
+# TableTransformerRAG — Dependencies
+#
+# Core (same as HierFinRAG)
+sentence-transformers>=2.6.0    # BGE-M3 embeddings + BGE reranker
+qdrant-client>=1.9.0            # Local vector store
+rank-bm25>=0.2.2                # Sparse BM25 retrieval
+openai>=1.25.0                  # Ollama OpenAI-compatible client
+tqdm>=4.66.0
+
+# TATR table detection and structure recognition
+transformers>=4.40.0            # TableTransformerForObjectDetection
+torch>=2.1.0                    # PyTorch (CUDA 12.x build recommended)
+torchvision>=0.16.0             # Required by TATR DETR backbone
+timm>=0.9.0                     # TATR ResNet-18 backbone (required by transformers)
+Pillow>=10.0.0                  # PIL image handling
+
+# PDF processing
+pymupdf>=1.23.0                 # fitz — render PDF pages to images
+pdfplumber>=0.10.0              # Word-level text extraction
+
+# Already installed in ragenv (verified):
+#   numpy, huggingface-hub, tokenizers
