@@ -273,6 +273,51 @@ the program deterministically via \texttt{numexpr}, supporting nested
 expressions up to depth 15 (\texttt{add}, \texttt{subtract}, \texttt{multiply},
 \texttt{divide}, \texttt{percentage\_change}, \texttt{percentage}). This
 decouples arithmetic correctness from LLM generation quality.
+Fig.~\ref{fig:hierfinrag} summarises the complete HierFinRAG pipeline.
+
+%%--------------------------------------------------------------------
+%% Figure 1 — HierFinRAG Architecture
+%%--------------------------------------------------------------------
+\begin{figure}[htbp]
+\centering
+\resizebox{\columnwidth}{!}{%
+\begin{tikzpicture}[
+  node distance=0.3cm and 0.28cm,
+  every node/.style={font=\small},
+  qbox/.style={draw, rounded corners=3pt, fill=green!20,
+               minimum width=1.65cm, minimum height=0.55cm, align=center},
+  rbox/.style={draw, rounded corners=3pt, fill=orange!25,
+               minimum width=1.65cm, minimum height=0.55cm, align=center},
+  bbox/.style={draw, rounded corners=3pt, fill=blue!15,
+               minimum width=1.65cm, minimum height=0.55cm, align=center},
+  arr/.style={-{Stealth[length=4pt]}, thick}
+]
+%% Top row: Query → Router → L1 → L2
+\node[qbox] (q) {Query $q$};
+\node[rbox, right=of q] (router) {Intent\\Router};
+\node[bbox, right=of router] (l1) {L1: Filter\\+ Expand};
+\node[bbox, right=of l1] (l2) {L2: BM25\\+ BGE-M3 RRF};
+%% Turn downward
+\node[bbox, below=0.75cm of l2] (l3) {L3: Cell\\Dense};
+%% Bottom row (right → left): Reranker → Generator → Answer
+\node[bbox, left=of l3] (rerank) {Cross-Encoder\\Reranker};
+\node[rbox, left=of rerank] (gen) {Sym.-Neural\\Generator};
+\node[qbox, left=of gen] (ans) {Answer};
+%% Arrows
+\draw[arr] (q)      -- (router);
+\draw[arr] (router) -- (l1);
+\draw[arr] (l1)     -- (l2);
+\draw[arr] (l2)     -- (l3);
+\draw[arr] (l3)     -- (rerank);
+\draw[arr] (rerank) -- (gen);
+\draw[arr] (gen)    -- (ans);
+\end{tikzpicture}%
+}
+\caption{HierFinRAG pipeline: intent routing, three-level hybrid retrieval
+(BM25$+$BGE-M3 RRF, cross-encoder reranking), and symbolic-neural fusion
+generation.}
+\label{fig:hierfinrag}
+\end{figure}
 
 \subsection{TableTransformerRAG}
 
@@ -306,7 +351,54 @@ enabling a fair downstream comparison.
 TableTransformerRAG shares the same three-level retrieval, RRF hybrid search,
 cross-encoder reranker, intent router, and symbolic DSL calculator as
 HierFinRAG. The only difference is table chunk provenance (visual TATR
-detection vs.\ heuristic pdfplumber parsing).
+detection vs.\ heuristic pdfplumber parsing). Fig.~\ref{fig:tatrag} illustrates
+the full TATR-specific parsing front-end.
+
+%%--------------------------------------------------------------------
+%% Figure 2 — TableTransformerRAG Architecture
+%%--------------------------------------------------------------------
+\begin{figure}[htbp]
+\centering
+\resizebox{\columnwidth}{!}{%
+\begin{tikzpicture}[
+  node distance=0.3cm and 0.28cm,
+  every node/.style={font=\small},
+  qbox/.style={draw, rounded corners=3pt, fill=green!20,
+               minimum width=1.65cm, minimum height=0.55cm, align=center},
+  vbox/.style={draw, rounded corners=3pt, fill=purple!15,
+               minimum width=1.65cm, minimum height=0.55cm, align=center},
+  bbox/.style={draw, rounded corners=3pt, fill=blue!15,
+               minimum width=1.65cm, minimum height=0.55cm, align=center},
+  obox/.style={draw, rounded corners=3pt, fill=orange!25,
+               minimum width=1.65cm, minimum height=0.55cm, align=center},
+  arr/.style={-{Stealth[length=4pt]}, thick}
+]
+%% Top row: PDF → PyMuPDF → TATR Detection → TATR Structure
+\node[qbox] (pdf) {PDF Pages};
+\node[vbox, right=of pdf] (pymupdf) {PyMuPDF\\300 DPI};
+\node[vbox, right=of pymupdf] (tatrdet) {TATR\\Detection};
+\node[vbox, right=of tatrdet] (tatrstruct) {TATR Structure\\Recog.};
+%% Turn downward
+\node[bbox, below=0.75cm of tatrstruct] (coord) {Coord.\\Mapping};
+%% Bottom row (right → left): Indexing → Retrieval+Gen → Answer
+\node[bbox, left=of coord] (index) {Chunk\\Indexing};
+\node[obox, left=of index] (retrieval) {3-Level Retrieval\\+ Generator};
+\node[qbox, left=of retrieval] (ans) {Answer};
+%% Arrows
+\draw[arr] (pdf)       -- (pymupdf);
+\draw[arr] (pymupdf)   -- (tatrdet);
+\draw[arr] (tatrdet)   -- (tatrstruct);
+\draw[arr] (tatrstruct)-- (coord);
+\draw[arr] (coord)     -- (index);
+\draw[arr] (index)     -- (retrieval);
+\draw[arr] (retrieval) -- (ans);
+\end{tikzpicture}%
+}
+\caption{TableTransformerRAG pipeline: DETR-based visual table detection and
+structure recognition (TATR), pixel-to-PDF-point coordinate mapping, and the
+shared three-level retrieval and symbolic-neural generation stack.}
+\label{fig:tatrag}
+\end{figure}
 
 %% ============================================================================
 \section{Engineering Challenges \& Iterative Optimization}
@@ -439,6 +531,7 @@ achieves slightly higher retrieval recall due to its reliable heuristic
 section detection on Apple (which has proper PDF bookmarks). BasicRAG, despite
 strong recall, fails on generation---confirming that structure-aware retrieval
 and symbolic arithmetic are both necessary.
+Fig.~\ref{fig:crosssys} visualises the performance gap across all three systems.
 
 \begin{table}[htbp]
 \caption{Cross-System Best-Configuration Comparison (110~QA pairs)}
@@ -457,6 +550,47 @@ HierFinRAG      & 0.400 & 0.240 & \best{0.934} & 8,097 \\
 \end{tabular}
 \end{table}
 
+%%--------------------------------------------------------------------
+%% Figure 3 — Cross-System Performance Bar Chart
+%%--------------------------------------------------------------------
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+  ybar,
+  bar width=7pt,
+  width=0.95\columnwidth,
+  height=4.6cm,
+  symbolic x coords={BasicRAG, HierFinRAG, {TATR-R4}},
+  xtick=data,
+  ymin=0, ymax=108,
+  ylabel={Score (\%)},
+  ymajorgrids=true,
+  grid style={dashed, gray!30},
+  tick label style={font=\scriptsize},
+  label style={font=\scriptsize},
+  legend style={at={(0.02,0.98)}, anchor=north west,
+                font=\scriptsize, legend columns=1},
+  enlarge x limits=0.28,
+]
+\addplot[fill=blue!55, draw=blue!70] coordinates {
+  (BasicRAG,3.0) (HierFinRAG,40.0) ({TATR-R4},48.2)
+};
+\addplot[fill=orange!55, draw=orange!70] coordinates {
+  (BasicRAG,80.3) (HierFinRAG,93.4) ({TATR-R4},89.7)
+};
+\addplot[fill=green!50, draw=green!65] coordinates {
+  (BasicRAG,10.4) (HierFinRAG,24.0) ({TATR-R4},38.7)
+};
+\legend{EM, Recall, F1$\times$100}
+\end{axis}
+\end{tikzpicture}
+\caption{Cross-system performance (best config per system, 110~QA pairs).
+TATR-R4 achieves the highest EM ($+8.2$pp over HierFinRAG) and F1; HierFinRAG
+leads on Retrieval Recall.}
+\label{fig:crosssys}
+\end{figure}
+
 \subsection{Per-Intent Analysis}
 
 Table~\ref{tab:intent} shows route-level accuracy. TableTransformerRAG-R4
@@ -465,6 +599,7 @@ Summarization (60.0\%). Both systems score 0/5 on Comparison without the
 evaluator fix (Round~2); after the fix, TATR-R4 achieves 3/5 (60.0\%).
 HierFinRAG shows stronger Numerical performance (22/50 vs.\ 20/50) due to
 more reliable table structure from pdfplumber on Apple's clean tables.
+Fig.~\ref{fig:perintent} plots the per-intent breakdown.
 
 \begin{table}[htbp]
 \caption{Per-Intent Execution Accuracy: Best Configuration per System}
@@ -482,6 +617,44 @@ HierFinRAG     & 22/50 & 19/50 & 0/5  & 3/5 \\
 \bottomrule
 \end{tabular}
 \end{table}
+
+%%--------------------------------------------------------------------
+%% Figure 4 — Per-Intent Accuracy Bar Chart
+%%--------------------------------------------------------------------
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+  ybar,
+  bar width=8pt,
+  width=0.95\columnwidth,
+  height=4.6cm,
+  symbolic x coords={Numerical, Lookup, Comparison, Summarization},
+  xtick=data,
+  ymin=0, ymax=82,
+  ylabel={Accuracy (\%)},
+  ymajorgrids=true,
+  grid style={dashed, gray!30},
+  tick label style={font=\scriptsize},
+  label style={font=\scriptsize},
+  x tick label style={rotate=13, anchor=east, font=\scriptsize},
+  legend style={at={(0.98,0.98)}, anchor=north east, font=\scriptsize},
+  enlarge x limits=0.18,
+]
+\addplot[fill=blue!55, draw=blue!70] coordinates {
+  (Numerical,44.0) (Lookup,38.0) (Comparison,0.0) (Summarization,60.0)
+};
+\addplot[fill=orange!55, draw=orange!70] coordinates {
+  (Numerical,40.0) (Lookup,54.0) (Comparison,60.0) (Summarization,60.0)
+};
+\legend{HierFinRAG, TATR-R4}
+\end{axis}
+\end{tikzpicture}
+\caption{Per-intent execution accuracy (\%). TATR-R4 leads on Lookup
+($+16$pp) and Comparison ($+60$pp); HierFinRAG leads slightly on
+Numerical ($+4$pp). Summarization is tied at 60\%.}
+\label{fig:perintent}
+\end{figure}
 
 \subsection{Per-Document Analysis}
 

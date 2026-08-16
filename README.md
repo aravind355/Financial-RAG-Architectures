@@ -12,12 +12,9 @@ rag/
 ├── Basic_Rag/              # Baseline single-stage flat RAG (BGE-M3 + Qdrant)
 ├── HierFinRag/             # 3-level hierarchical RAG (RRF + Symbolic DSL)
 ├── TableTransformerRAG/    # DETR-based visual table RAG (Microsoft TATR)
-├── Table_Extraction/       # Vision table detection experimental benchmarks
+├── ARCHITECTURE.md         # Detailed pipeline architecture & dataflow diagrams
 ├── IITH_paper.tex          # IEEE conference standard research paper (LaTeX)
-├── IITH_paper.pdf          # Compiled 5-page IEEE research paper PDF
-├── IITH.tex                # Comprehensive 18-page technical project report
-├── abstract.tex            # Standalone abstract document
-├── report_25_07_2026.tex   # TableTransformerRAG 4-round optimization analysis
+├── IITH_paper.pdf          # Compiled 6-page IEEE research paper PDF
 └── requirements.txt        # Unified Python dependencies file
 ```
 
@@ -30,6 +27,15 @@ rag/
 | **BasicRAG** | Flat `pdfplumber` | Single-stage | LLM direct | **3.0%** | 80.3% |
 | **HierFinRAG** | Structural `pdfplumber` | 4-level tree | Symbolic DSL | **40.0%** | **93.4%** |
 | **TableTransformerRAG** | DETR Vision (TATR) | 4-level tree | Symbolic DSL | **48.2%** | 89.7% |
+
+---
+
+## 🏗️ Pipeline Architecture Diagrams
+
+Detailed visual data flow and component architecture diagrams for all three systems are documented in **[ARCHITECTURE.md](ARCHITECTURE.md)**:
+- **[BasicRAG Pipeline Workflow](ARCHITECTURE.md#1-basicrag--flat-baseline)**: Flat parsing, dense embeddings, vector search, and direct LLM generation.
+- **[HierFinRAG Pipeline Workflow](ARCHITECTURE.md#2-hierfinrag--hierarchical-symbolic-neural-fusion)**: 4-level document tree, 2-stage intent router, 3-level hybrid search (BM25 + BGE-M3 + RRF), and deterministic FinQA DSL execution.
+- **[TableTransformerRAG Pipeline Workflow](ARCHITECTURE.md#3-tabletransformerrag--vision-based-detr-detection)**: Vision-based DETR table detection, 300-DPI crop-to-PDF coordinate mapping, and two-pass zero-shot extraction.
 
 ---
 
@@ -79,8 +85,7 @@ pdflatex IITH_paper.tex
 
 ## 📄 Key Research Output
 - **IEEE Research Paper**: [`IITH_paper.pdf`](IITH_paper.pdf)
-- **Technical Report**: [`IITH.pdf`](IITH.pdf)
-- **Abstract PDF**: [`abstract.pdf`](abstract.pdf)
+- **Architecture & System Workflows**: [`ARCHITECTURE.md`](ARCHITECTURE.md)
 
 ---
 
